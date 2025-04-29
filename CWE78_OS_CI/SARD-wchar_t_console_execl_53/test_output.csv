@@ -1,0 +1,19 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,slices,tokenized,token_length,predict
+CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c,CWE78_OS_Command_Injection__wchar_t_console_execl_53_bad,False,False,0,CWE-78,CallExpression,wcslen,55,0,"['    wchar_t * data;\n', '    wchar_t dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '        size_t dataLen = wcslen(data);\n', '        if (100-dataLen > 1)\n', '            if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL)\n', '                dataLen = wcslen(data);\n', '    CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);\n']","wchar_t *Var1; 
+wchar_t  Var2[100]=Var3; 
+Var1=Var2; 
+size_t  Var4=wcslen(Var1); 
+if (100-Var4>1)
+if (FUNC1(Var1+Var4,(int )(100-Var4),stdin) != NULL )
+Var4=wcslen(Var1); 
+FUNC2(Var1); 
+",98,0
+CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c,CWE78_OS_Command_Injection__wchar_t_console_execl_53_bad,False,False,1,CWE-78,CallExpression,wcslen,64,0,"['    wchar_t * data;\n', '    wchar_t dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '        size_t dataLen = wcslen(data);\n', '        if (100-dataLen > 1)\n', '            if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL)\n', '                dataLen = wcslen(data);\n', '    CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);\n']","wchar_t *Var1; 
+wchar_t  Var2[100]=Var3; 
+Var1=Var2; 
+size_t  Var4=wcslen(Var1); 
+if (100-Var4>1)
+if (FUNC1(Var1+Var4,(int )(100-Var4),stdin) != NULL )
+Var4=wcslen(Var1); 
+FUNC2(Var1); 
+",98,0

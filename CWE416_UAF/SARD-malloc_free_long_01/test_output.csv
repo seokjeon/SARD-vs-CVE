@@ -1,0 +1,38 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,slices,tokenized,token_length,predict
+CWE416_Use_After_Free__malloc_free_long_01.c,CWE416_Use_After_Free__malloc_free_long_01_bad,False,False,0,CWE-416,CallExpression,malloc,29,0,"['    long * data;\n', '    data = (long *)malloc(100*sizeof(long));\n', '        size_t i;\n', '        for(i = 0; i < 100; i++)\n', '            data[i] = 5L;\n', '    free(data);\n', '    printLongLine(data[0]);\n']","long *Var1; 
+Var1=(long *) malloc(100*sizeof (long )); 
+size_t  Var2; 
+for (Var2=0; Var2<100; Var2  Var3)
+Var1[Var2]=Var4; 
+free(Var1); 
+FUNC1(Var1[0]); 
+",85,0
+CWE416_Use_After_Free__malloc_free_long_01.c,CWE416_Use_After_Free__malloc_free_long_01_bad,False,False,1,CWE-416,CallExpression,free,39,0,"['    long * data;\n', '    data = (long *)malloc(100*sizeof(long));\n', '        size_t i;\n', '        for(i = 0; i < 100; i++)\n', '            data[i] = 5L;\n', '    free(data);\n', '    printLongLine(data[0]);\n']","long *Var1; 
+Var1=(long *) malloc(100*sizeof (long )); 
+size_t  Var2; 
+for (Var2=0; Var2<100; Var2  Var3)
+Var1[Var2]=Var4; 
+free(Var1); 
+FUNC1(Var1[0]); 
+",85,0
+CWE416_Use_After_Free__malloc_free_long_01.c,goodG2B,False,False,2,CWE-416,CallExpression,malloc,55,1,"['    long * data;\n', '    data = (long *)malloc(100*sizeof(long));\n', '        size_t i;\n', '        for(i = 0; i < 100; i++)\n', '            data[i] = 5L;\n', '    printLongLine(data[0]);\n']","long *Var1; 
+Var1=(long *) malloc(100*sizeof (long )); 
+size_t  Var2; 
+for (Var2=0; Var2<100; Var2  Var3)
+Var1[Var2]=Var4; 
+FUNC1(Var1[0]); 
+",78,1
+CWE416_Use_After_Free__malloc_free_long_01.c,goodB2G,False,False,3,CWE-416,CallExpression,malloc,76,0,"['    long * data;\n', '    data = (long *)malloc(100*sizeof(long));\n', '        size_t i;\n', '        for(i = 0; i < 100; i++)\n', '            data[i] = 5L;\n', '    free(data);\n']","long *Var1; 
+Var1=(long *) malloc(100*sizeof (long )); 
+size_t  Var2; 
+for (Var2=0; Var2<100; Var2  Var3)
+Var1[Var2]=Var4; 
+free(Var1); 
+",74,1
+CWE416_Use_After_Free__malloc_free_long_01.c,goodB2G,False,False,4,CWE-416,CallExpression,free,86,0,"['    long * data;\n', '    data = (long *)malloc(100*sizeof(long));\n', '        size_t i;\n', '        for(i = 0; i < 100; i++)\n', '            data[i] = 5L;\n', '    free(data);\n']","long *Var1; 
+Var1=(long *) malloc(100*sizeof (long )); 
+size_t  Var2; 
+for (Var2=0; Var2<100; Var2  Var3)
+Var1[Var2]=Var4; 
+free(Var1); 
+",74,1

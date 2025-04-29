@@ -1,0 +1,47 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,slices,tokenized,token_length,predict
+CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63a.c,CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63_bad,False,False,0,CWE-134,CallExpression,wcslen,42,0,"['    wchar_t * data;\n', '    data = dataBuffer;\n', '        size_t dataLen = wcslen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            if (pFile != NULL)\n']","wchar_t *Var1; 
+Var1=Var2; 
+size_t  Var3=wcslen(Var1); 
+STRUCT1 *Var4; 
+if (100-Var3>1)
+if (Var4 != NULL )
+",56,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63a.c,CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63_bad,False,False,1,CWE-134,CallExpression,fopen,47,0,"['    wchar_t * data;\n', '        size_t dataLen = wcslen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            pFile = fopen(FILENAME, ""r"");\n', '            if (pFile != NULL)\n', '                fclose(pFile);\n']","wchar_t *Var1; 
+size_t  Var2=wcslen(Var1); 
+STRUCT1 *Var3; 
+if (100-Var2>1)
+Var3=fopen(Var4,STRING); 
+if (Var3 != NULL )
+fclose(Var3); 
+",68,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63a.c,CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63_bad,False,False,2,CWE-134,CallExpression,fclose,57,0,"['    wchar_t * data;\n', '        size_t dataLen = wcslen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            pFile = fopen(FILENAME, ""r"");\n', '            if (pFile != NULL)\n', '                fclose(pFile);\n']","wchar_t *Var1; 
+size_t  Var2=wcslen(Var1); 
+STRUCT1 *Var3; 
+if (100-Var2>1)
+Var3=fopen(Var4,STRING); 
+if (Var3 != NULL )
+fclose(Var3); 
+",68,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63a.c,goodB2G,False,False,3,CWE-134,CallExpression,wcslen,91,0,"['    wchar_t * data;\n', '    data = dataBuffer;\n', '        size_t dataLen = wcslen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            if (pFile != NULL)\n']","wchar_t *Var1; 
+Var1=Var2; 
+size_t  Var3=wcslen(Var1); 
+STRUCT1 *Var4; 
+if (100-Var3>1)
+if (Var4 != NULL )
+",56,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63a.c,goodB2G,False,False,4,CWE-134,CallExpression,fopen,96,0,"['    wchar_t * data;\n', '        size_t dataLen = wcslen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            pFile = fopen(FILENAME, ""r"");\n', '            if (pFile != NULL)\n', '                fclose(pFile);\n']","wchar_t *Var1; 
+size_t  Var2=wcslen(Var1); 
+STRUCT1 *Var3; 
+if (100-Var2>1)
+Var3=fopen(Var4,STRING); 
+if (Var3 != NULL )
+fclose(Var3); 
+",68,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_printf_63a.c,goodB2G,False,False,5,CWE-134,CallExpression,fclose,106,0,"['    wchar_t * data;\n', '        size_t dataLen = wcslen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            pFile = fopen(FILENAME, ""r"");\n', '            if (pFile != NULL)\n', '                fclose(pFile);\n']","wchar_t *Var1; 
+size_t  Var2=wcslen(Var1); 
+STRUCT1 *Var3; 
+if (100-Var2>1)
+Var3=fopen(Var4,STRING); 
+if (Var3 != NULL )
+fclose(Var3); 
+",68,0
