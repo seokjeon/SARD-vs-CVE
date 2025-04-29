@@ -23,14 +23,20 @@ AI가 SARD는 잘 탐지하지만 CVE는 놓치는 이유를 분석하기 위해
 
 ## 순서
 ### 1. 정리할 소스 코드 선정
-#### CVE 선정 기준 
-1. C/C++ 기반 코드
-2. 18개월 이내 발급된 CVE
-3. 해당 CWE에 매핑 가능
-4. PoC 확인 가능 or patch diff 명확
+#### SARD 소스 코드 선택 방법
+- 할당 받은 CWE 중 [SARD Juliet C/C++ 1.3.1 with extra support](https://samate.nist.gov/SARD/test-suites/116)에서 해당 CWE 코드 3개 자유롭게 선택
+- [Joern-CWE-Analysis](https://github.com/alpakalee/Joern-CWE-Analysis/tree/main)에 있는 코드도 활용 가능
+
+#### CVE 소스 코드 선택 방법
+- 할당 받은 CWE 중 [BigVul](https://huggingface.co/datasets/bstee615/bigvul)에서 CVE 3개 자유롭게 선택
+- 빠른 작업을 위해 [BigVul에서 CWE 별 3개씩 추천](https://huggingface.co/datasets/bstee615/bigvul/viewer?views%5B%5D=train&sql=%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-134%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-190%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-400%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-416%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-476%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-78%27+LIMIT+3%29%0AORDER+BY+%22CWE+ID%22%3B)해놨지만, 이해하기 어려우면 다른 CVE를 선택해도 무방
 
 ### 2. vuln_src.c
-source → sink 흐름을 포함한 최소 단위 코드로 구성
+- 취약점 조건을 포함하는 모든 소스 파일 업로드
+- 파일명 수정 없이 원본 그대로 제출
+
+**예시: use-after-free 경우, A파일: free 발생 + B파일: free된 변수 USE**
+→ A, B 파일 모두 업로드
 
 ### 3. slice.json
 KSignSlicer로 추출하면 나오는 result.json에서 해당 vuln 코드에 대응하는 슬라이스만 선별 저장
