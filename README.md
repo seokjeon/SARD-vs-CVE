@@ -46,7 +46,9 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
 ### vuln_src.c 선별
 #### 분석할 취약점 선택 방법
 ##### SARD의 경우
-- 할당 받은 CWE 중 [SARD Juliet C/C++ 1.3.1 with extra support](https://samate.nist.gov/SARD/test-suites/116)에서 해당 CWE 코드 2개 자유롭게 선택
+- 할당 받은 CWE 중 [SARD Juliet C/C++ 1.3](https://samate.nist.gov/SARD/test-suites/112)에서 해당 CWE 코드 2개 자유롭게 선택
+  
+※ KSign 영상 자료인 '합본) 모델 설계'와의 버전 호환을 위해, 최신 버전(v1.3.1 with extra support)이 아닌 v1.3 버전을 사용
 
 ※ [Joern-CWE-Analysis](https://github.com/alpakalee/Joern-CWE-Analysis)에서 이미 분석한 취약점들은 샘플로 미리 입력해두었으니 참고용으로 활용 가능
 
