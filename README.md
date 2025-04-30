@@ -11,41 +11,58 @@ AI가 SARD는 잘 탐지하지만 CVE는 놓치는 이유를 분석하기 위해
 /CWE134_FSB/
 ├── CVE-2021-1234/
 │   ├── vuln_src.c
-│   ├── slice.json
-│   ├── vector
-│   └── README.md
+│   ├── README.md
+│   ├── slicer_result.json
+│   ├── slicer_result.symbolized.json
+│   ├── test_output.csv
+│   └── vectors.json
 ├── SARD-wchar_t_file_printf_63/
-│   └── vuln_src.c
-│   ├── slice.json
-│   ├── vector
-│   └── README.md
+│   ├── vuln_src.c
+│   ├── README.md
+│   ├── slicer_result.json
+│   ├── slicer_result.symbolized.json
+│   ├── test_output.csv
+│   └── vectors.json
 ```
 
-## 순서
-### 1. 정리할 소스 코드 선정
-#### SARD 소스 코드 선택 방법
-- 할당 받은 CWE 중 [SARD Juliet C/C++ 1.3.1 with extra support](https://samate.nist.gov/SARD/test-suites/116)에서 해당 CWE 코드 3개 자유롭게 선택
-- [Joern-CWE-Analysis](https://github.com/alpakalee/Joern-CWE-Analysis/tree/main)에 있는 코드도 활용 가능
+## 절차
+### 환경 준비
+시작에 앞서 [KSignSlicer](https://github.com/seokjeon/KSignSlicer) 동작 환경을 준비해주시기 바랍니다. 
 
-#### CVE 소스 코드 선택 방법
+특히, test_output.csv 추출을 위해서는 **디컴파일하지 않은 모델 학습이 반드시 선행되어야** 합니다.
+
+※ KSignSlicer 저장소 권한이 필요한 경우, 담당자(sojeon@jnu.ac.kr)에게 **GitHub 사용자명과 함께 요청**해 주시기 바랍니다.
+
+### vuln_src.c 선별
+#### 분석할 취약점 선택 방법
+##### SARD의 경우
+- 할당 받은 CWE 중 [SARD Juliet C/C++ 1.3.1 with extra support](https://samate.nist.gov/SARD/test-suites/116)에서 해당 CWE 코드 2개 자유롭게 선택
+
+※ [Joern-CWE-Analysis](https://github.com/alpakalee/Joern-CWE-Analysis)에서 이미 분석한 취약점들은 샘플로 미리 입력해두었으니 참고용으로 활용 가능
+
+##### CVE의 경우
 - 할당 받은 CWE 중 [BigVul](https://huggingface.co/datasets/bstee615/bigvul)에서 CVE 3개 자유롭게 선택
 - 빠른 작업을 위해 [BigVul에서 CWE 별 CVE 3개씩 추천](https://huggingface.co/datasets/bstee615/bigvul/viewer?views%5B%5D=train&sql=%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-134%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-190%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-400%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-416%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-476%27+LIMIT+3%29%0AUNION+ALL%0A%28SELECT+*+FROM+train+WHERE+%22CWE+ID%22+%3D+%27CWE-78%27+LIMIT+3%29%0AORDER+BY+%22CWE+ID%22%3B)해놨지만, 이해하기 어려우면 다른 CVE를 선택해도 무방
 
-### 2. vuln_src.c
-- 취약점 조건을 포함하는 모든 소스 파일 업로드
-- 파일명 수정 없이 원본 그대로 제출
+#### 업로드할 vuln_src.c 선택 기준
+기본 원칙: 파일명 수정 없이 원본 그대로 제출
+- CVE: 취약점 동작 조건을 포함하는 모든 관련 소스 파일 업로드
 
-**예시: use-after-free 경우, A파일: free 발생 + B파일: free된 변수 USE**
-→ A, B 파일 모두 업로드
+  **예시: use-after-free 경우, A파일: free 발생 + B파일: free된 변수 USE**
+  → A, B 파일 모두 업로드
+- SARD: 해당 취약 코드 전체 업로드
 
-### 3. slice.json
-KSignSlicer로 추출하면 나오는 result.json에서 해당 vuln 코드에 대응하는 슬라이스만 선별 저장
+### slicer_result.json와 slicer_result.symbolized.json
+1. 선택한 vuln_src.c 파일들을 vuln_src 폴더에 위치시킵니다.
+2. [KSignSlicer](https://github.com/seokjeon/KSignSlicer) 환경의 Joern을 사용하여 vuln_src에 대한 CPG를 추출합니다. 
+3. [slicer.py](https://github.com/seokjeon/KSignSlicer/blob/main/tools/KSignSlicer/slicer.py)를 실행하여 slicer_result.json을 추출합니다.
+  * SARD의 경우, 계산된 라벨의 원본을 보존하기 위해 -genTest 옵션 없이 실행해야 합니다.
+4. [symbolic_tokenize.py](https://github.com/seokjeon/KSignSlicer/blob/main/tools/KSignSlicer/symbolic_tokenize.py)를 실행하여 slicer_result.symbolized.json을 추출합니다.
 
-### 4. vector
-`source_ids = tokenizer.convert_tokens_to_ids(source_tokens)` 결과를  
-`{ "slice파일명": source_ids }` 형태로 JSON 저장
+### vectors.json과 test_output.csv
+[test.py](https://github.com/seokjeon/KSignSlicer/blob/main/tools/KSignSlicer/test.py)를 실행할 때, --verbose 옵션을 추가하면 vectors.json과 함께 test_output.csv가 추출됩니다.
 
-### 5. README.md
+### README.md
 - [ ] 폴더 명
 - [ ] 취약 동작 요약 (버그 발생 조건, 트리거 흐름)
 - [ ] root cause (source → sink 흐름 요약)
