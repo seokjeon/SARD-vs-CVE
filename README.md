@@ -8,8 +8,7 @@ AI가 SARD는 잘 탐지하지만 CVE는 놓치는 이유를 분석하기 위해
    - [vuln_src.c 선별](#vuln_srcc-선별)
      - [SARD의 경우](#sard의-경우)
      - [CVE의 경우](#cve의-경우)
-   - [slicer_result.json와 slicer_result.symbolized.json 추출](#slicer_resultjson와-slicer_resultsymbolizedjson-추출)
-   - [vectors.json과 test_output.csv 추출](#vectorsjson과-test_outputcsv-추출)
+   - [분석 결과물 수집](#분석-결과물-수집)
    - [README.md](#readmemd)
 3. [기여 방법](#기여-방법)
 4. [문의 사항](#문의-사항)
@@ -39,7 +38,7 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
 ### 환경 준비
 시작에 앞서 [KSignSlicer](https://github.com/seokjeon/KSignSlicer) 동작 환경을 준비해주시기 바랍니다. 
 
-특히, test_output.csv 추출을 위해서는 **디컴파일하지 않은 모델 학습이 반드시 선행되어야** 합니다.
+특히, test_output.csv 추출을 위해서는 **모델 학습이 반드시 선행되어야** 합니다.
 
 ※ KSignSlicer 저장소 권한이 필요한 경우, 담당자(sojeon@jnu.ac.kr)에게 **GitHub 사용자명과 함께 요청**해 주시기 바랍니다.
 
@@ -64,18 +63,26 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
   → A, B 파일 모두 업로드
 - SARD: 해당 취약 코드 전체 업로드
 
-### slicer_result.json와 slicer_result.symbolized.json 추출
-1. 선택한 vuln_src.c 파일들을 vuln_src 폴더에 위치시킵니다.
-2. [KSignSlicer](https://github.com/seokjeon/KSignSlicer) 환경의 Joern을 사용하여 vuln_src에 대한 CPG를 추출합니다. 
-3. [slicer.py](https://github.com/seokjeon/KSignSlicer/blob/main/tools/KSignSlicer/slicer.py)를 실행하여 slicer_result.json을 추출합니다.
-   * SARD의 경우, 계산된 라벨의 원본을 보존하기 위해 -genTest 옵션 없이 실행해야 합니다.
-4. [symbolic_tokenize.py](https://github.com/seokjeon/KSignSlicer/blob/main/tools/KSignSlicer/symbolic_tokenize.py)를 실행하여 slicer_result.symbolized.json을 추출합니다.
+### 분석 결과물 수집
+[KSignSlicer의 사용법](https://github.com/seokjeon/KSignSlicer?tab=readme-ov-file#%EC%82%AC%EC%9A%A9%EB%B2%95)을 따라 명령을 수행한 후 프로젝트 폴더 구조를 참조하여 필요한 분석 결과물 수집
 
-### vectors.json과 test_output.csv 추출
-[test.py](https://github.com/seokjeon/KSignSlicer/blob/main/tools/KSignSlicer/test.py)를 실행할 때, --verbose 옵션을 추가하면 vectors.json과 test_output.csv가 함께 추출됩니다.
+* SARD의 경우, 계산된 라벨의 원본을 보존하기 위해 -genTest 옵션 없이 실행해야 합니다.
+  
+#### 수집 대상 파일
+* slicer_result.json
+* slicer_result.symbolized.json
+* vectors.json
+* test_output.csv
+
+※ Docker 컨테이너에서 파일 복사 방법
+
+예) 컨테이너 이름이 ksigncontainer이고, 결과 디렉토리가 /KSignSlicer/output/{proj_name}인 경우: 
+
+`docker cp ksigncontainer:/KSignSlicer/output/{proj_name}/slicer_result.json .`
+
 
 ### README.md
-<업데이트 중>
+<고민(업데이트) 중>
 
 - [ ] 폴더 명
 - [ ] 취약 동작 요약 (버그 발생 조건, 트리거 흐름)
