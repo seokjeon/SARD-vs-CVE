@@ -19,14 +19,16 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
 ```
 /CWE134_FSB/
 ├── CVE-2021-1234/
-│   ├── vuln_src.c
+│   ├── before_{원본 파일명}.c            # 패치 전/후 diff가 있는 파일에만 before_, after_ 접두어를 붙여서 업로드
+│   ├── after_{원본 파일명}.c
+│   ├── CVE-2021-1234.diff
 │   ├── README.md
 │   ├── slicer_result.json
 │   ├── slicer_result.symbolized.json
 │   ├── test_output.csv
 │   └── vectors.json
 ├── SARD-wchar_t_file_printf_63/
-│   ├── vuln_src.c
+│   ├── {원본 파일명}.c
 │   ├── README.md
 │   ├── slicer_result.json
 │   ├── slicer_result.symbolized.json
