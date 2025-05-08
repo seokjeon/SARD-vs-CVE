@@ -9,7 +9,8 @@ AI가 SARD는 잘 탐지하지만 CVE는 놓치는 이유를 분석하기 위해
      - [SARD의 경우](#sard의-경우)
      - [CVE의 경우](#cve의-경우)
    - [분석 결과물 수집](#분석-결과물-수집)
-   - [README.md](#readmemd)
+     - [분석 관련 FAQ](#분석-관련-faq) 
+   - [README.md 작성 가이드](#readmemd-작성-가이드)
 3. [기여 방법](#기여-방법)
 4. [문의 사항](#문의-사항)
 
@@ -76,14 +77,18 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
 * vectors.json
 * test_output.csv
 
-※ Docker 컨테이너에서 파일 복사 방법
-
+#### 분석 관련 FAQ
+##### ※ Docker 컨테이너에서 파일 복사 방법
 예) 컨테이너 이름이 ksigncontainer이고, 결과 디렉토리가 /KSignSlicer/output/{proj_name}인 경우: 
 
 `docker cp ksigncontainer:/KSignSlicer/output/{proj_name}/slicer_result.json .`
 
+##### ※ 분석 중 에러 발생 시, 대응 방안
+[다음](https://github.com/seokjeon/SARD-vs-CVE/tree/main/CWE78_OS_CI/CVE-2019-13638*#-%EA%B0%9C%EC%9A%94)과 같이 
+- [ ] 폴더 명 뒤에 *를 붙이고 (예, CVE-2019-13638\*)
+- [ ] README 상단에 어떤 명령어를 실행해서 어떤 에러가 나왔는지 기록 
 
-### README.md
+### README.md 작성 가이드
 <고민(업데이트) 중>
 
 - [ ] 폴더 명
