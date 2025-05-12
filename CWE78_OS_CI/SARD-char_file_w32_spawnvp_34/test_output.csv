@@ -1,0 +1,59 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,slices,tokenized,token_length,predict
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,0,CWE-78,CallExpression,strlen,60,0,"['    char * data;\n', '    CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_unionType myUnion;\n', '    char dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '        size_t dataLen = strlen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            if (pFile != NULL)\n', '                if (fgets(data+dataLen, (int)(100-dataLen), pFile) == NULL)\n', ""                    data[dataLen] = '\\0';\n"", '    myUnion.unionFirst = data;\n', '        char * data = myUnion.unionSecond;\n', '            char *args[] = {COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL};\n']","char *Var1; 
+STRUCT1  Var2; 
+char  Var3[100]=Var4; 
+Var1=Var3; 
+size_t  Var5=strlen(Var1); 
+STRUCT2 *Var6; 
+if (100-Var5>1)
+if (Var6 != NULL )
+if (fgets(Var1+Var5,(int )(100-Var5),Var6) == NULL )
+Var1[Var5]=0; 
+Var2.memberVar1=Var1; 
+char *Var1=Var2.memberVar2; 
+char *Var7[]={Var8,Var9,Var10,NULL }; 
+",163,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,1,CWE-78,CallExpression,fopen,65,0,"['    char * data;\n', '        size_t dataLen = strlen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            pFile = fopen(FILENAME, ""r"");\n', '            if (pFile != NULL)\n', '                fclose(pFile);\n', '        char * data = myUnion.unionSecond;\n', '            char *args[] = {COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL};\n']","char *Var1; 
+size_t  Var2=strlen(Var1); 
+STRUCT1 *Var3; 
+if (100-Var2>1)
+Var3=fopen(Var4,STRING); 
+if (Var3 != NULL )
+fclose(Var3); 
+char *Var1=Var5.memberVar1; 
+char *Var6[]={Var7,Var8,Var9,NULL }; 
+",104,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,2,CWE-78,CallExpression,fgets,69,0,"['    char * data;\n', '    CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_unionType myUnion;\n', '    char dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '        size_t dataLen = strlen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            pFile = fopen(FILENAME, ""r"");\n', '            if (pFile != NULL)\n', '                if (fgets(data+dataLen, (int)(100-dataLen), pFile) == NULL)\n', ""                    data[dataLen] = '\\0';\n"", '                fclose(pFile);\n', '    myUnion.unionFirst = data;\n', '        char * data = myUnion.unionSecond;\n', '            char *args[] = {COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL};\n']","char *Var1; 
+STRUCT1  Var2; 
+char  Var3[100]=Var4; 
+Var1=Var3; 
+size_t  Var5=strlen(Var1); 
+STRUCT2 *Var6; 
+if (100-Var5>1)
+Var6=fopen(Var7,STRING); 
+if (Var6 != NULL )
+if (fgets(Var1+Var5,(int )(100-Var5),Var6) == NULL )
+Var1[Var5]=0; 
+fclose(Var6); 
+Var2.memberVar1=Var1; 
+char *Var1=Var2.memberVar2; 
+char *Var8[]={Var9,Var10,Var11,NULL }; 
+",182,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,3,CWE-78,CallExpression,fclose,75,0,"['    char * data;\n', '        size_t dataLen = strlen(data);\n', '        FILE * pFile;\n', '        if (100-dataLen > 1)\n', '            pFile = fopen(FILENAME, ""r"");\n', '            if (pFile != NULL)\n', '                fclose(pFile);\n', '        char * data = myUnion.unionSecond;\n', '            char *args[] = {COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL};\n']","char *Var1; 
+size_t  Var2=strlen(Var1); 
+STRUCT1 *Var3; 
+if (100-Var2>1)
+Var3=fopen(Var4,STRING); 
+if (Var3 != NULL )
+fclose(Var3); 
+char *Var1=Var5.memberVar1; 
+char *Var6[]={Var7,Var8,Var9,NULL }; 
+",104,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,goodG2B,False,False,4,CWE-78,CallExpression,strcat,104,1,"['    char * data;\n', '    CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_unionType myUnion;\n', '    char dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '    strcat(data, ""*.*"");\n', '    myUnion.unionFirst = data;\n', '        char * data = myUnion.unionSecond;\n']","char *Var1; 
+STRUCT1  Var2; 
+char  Var3[100]=Var4; 
+Var1=Var3; 
+strcat(Var1,STRING); 
+Var2.memberVar1=Var1; 
+char *Var1=Var2.memberVar2; 
+",64,1

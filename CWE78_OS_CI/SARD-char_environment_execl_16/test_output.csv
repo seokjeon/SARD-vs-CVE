@@ -1,0 +1,25 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,slices,tokenized,token_length,predict
+CWE78_OS_Command_Injection__char_environment_execl_16.c,CWE78_OS_Command_Injection__char_environment_execl_16_bad,False,False,0,CWE-78,CallExpression,strlen,62,0,"['    char * data;\n', '    char dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '    while(1)\n', '            size_t dataLen = strlen(data);\n', '            char * environment = GETENV(ENV_VARIABLE);\n', '            if (environment != NULL)\n', '                strncat(data+dataLen, environment, 100-dataLen-1);\n']","char *Var1; 
+char  Var2[100]=Var3; 
+Var1=Var2; 
+while (1)
+size_t  Var4=strlen(Var1); 
+char *Var5=FUNC1(Var6); 
+if (Var5 != NULL )
+strncat(Var1+Var4,Var5,100-Var4-1); 
+",89,0
+CWE78_OS_Command_Injection__char_environment_execl_16.c,CWE78_OS_Command_Injection__char_environment_execl_16_bad,False,False,1,CWE-78,CallExpression,strncat,68,0,"['    char * data;\n', '    char dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '    while(1)\n', '            size_t dataLen = strlen(data);\n', '            char * environment = GETENV(ENV_VARIABLE);\n', '            if (environment != NULL)\n', '                strncat(data+dataLen, environment, 100-dataLen-1);\n']","char *Var1; 
+char  Var2[100]=Var3; 
+Var1=Var2; 
+while (1)
+size_t  Var4=strlen(Var1); 
+char *Var5=FUNC1(Var6); 
+if (Var5 != NULL )
+strncat(Var1+Var4,Var5,100-Var4-1); 
+",89,0
+CWE78_OS_Command_Injection__char_environment_execl_16.c,goodG2B,False,False,2,CWE-78,CallExpression,strcat,91,1,"['    char * data;\n', '    char dataBuffer[100] = COMMAND_ARG2;\n', '    data = dataBuffer;\n', '    while(1)\n', '        strcat(data, ""*.*"");\n']","char *Var1; 
+char  Var2[100]=Var3; 
+Var1=Var2; 
+while (1)
+strcat(Var1,STRING); 
+",40,1
