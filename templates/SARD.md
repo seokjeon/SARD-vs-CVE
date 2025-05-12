@@ -10,9 +10,10 @@
 ## 🔍 취약점 설명
 * **Source**: wchar_t_console
 * **취약 조건**: 입력값 검증 부재
-* **Sink**: execl 인자로 console로 입력 받은 값 사용
+* **Sink**: execl()
 
 ### 📁 관련 파일 소개
+파일 한개 면, 작성 안하셔도 됩니다.
 
 | 파일명       | 설명                      |
 | --------- | ----------------------- |
@@ -31,12 +32,13 @@
 ```c
 ...
 // 예시 취약 코드
-if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL)
+if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL) /* POTENTIAL FLAW */
 ...
 CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);
 ```
 
 #### Trace
+없으면 제외 가능
 ```c
 void CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(wchar_t * data)
 {
@@ -54,7 +56,7 @@ void CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(wchar_t * dat
 {
     /* wexecl - specify the path where the command is located */
     /* POTENTIAL FLAW: Execute command without validating input possibly leading to command injection */
-    EXECL(COMMAND_INT_PATH, COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL);
+    EXECL(COMMAND_INT_PATH, COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL);  /* POTENTIAL FLAW */
 }
 ```
 
