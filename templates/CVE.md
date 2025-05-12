@@ -2,7 +2,9 @@
 
 **🔗 커밋 링크**: \[commit\_link\_here] | **🔗 CVE 링크**: \[cve\_link\_here]
 
-KSignSlicer 탐지 결과: 총 ?개의 슬라이스 중 정탐 x개, 미탐 y개
+| 총 슬라이스 수 |  정탐 | 미탐 |
+| --------  | -- | -- |
+| 2개       | 0개 | 2개 |
 
 ## 🔍 취약점 설명
 > 어떤 프로그램의 어떤 기능에 있는 어떤 함수에서 발생한 어떤 취약점입니다.
@@ -12,6 +14,7 @@ KSignSlicer 탐지 결과: 총 ?개의 슬라이스 중 정탐 x개, 미탐 y개
 * **취약 동작**: 입력값을 검증하지 않고 `system()` / `execl()` / 등의 위험한 함수 혹은 구문에 사용
 
 ### 📁 관련 파일 소개
+파일 한개 면, 작성 안하셔도 됩니다.
 
 | 파일명       | 설명                      |
 | --------- | ----------------------- |
@@ -24,18 +27,41 @@ KSignSlicer 탐지 결과: 총 ?개의 슬라이스 중 정탐 x개, 미탐 y개
 
 ### ❗️ 취약 코드
 
-**발생 위치**: `파일명:줄번호`
-
-```c
-// 예시 취약 코드
-char *input = getenv("USER_INPUT");
-system(input);  // 입력값 검증 없이 사용
-```
-
 **문제점**:
 사용자 입력이 적절히 검증되지 않은 채로 `system()` 함수의 인자로 사용되어 **명령어 인젝션**이 발생할 수 있음.
 
----
+#### Source: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:60`
+```c
+...
+// 예시 취약 코드
+if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL) /* POTENTIAL FLAW */
+...
+CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);
+```
+
+#### Trace
+없으면 제외 가능
+```c
+void CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(wchar_t * data)
+{
+    CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(data);
+}
+void CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(wchar_t * data)
+{
+    CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(data);
+}
+```
+
+#### Sink: `CWE78_OS_Command_Injection__wchar_t_console_execl_53d.c:50`
+```c
+void CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(wchar_t * data)
+{
+    /* wexecl - specify the path where the command is located */
+    /* POTENTIAL FLAW: Execute command without validating input possibly leading to command injection */
+    EXECL(COMMAND_INT_PATH, COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL);  /* POTENTIAL FLAW */
+}
+```
+
 
 ### ✅ 개선 코드
 
