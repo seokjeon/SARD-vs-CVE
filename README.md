@@ -8,14 +8,14 @@ AI가 SARD는 잘 탐지하지만 CVE는 놓치는 이유를 분석하기 위해
    - [vuln_src.c 선별](#vuln_srcc-선별)
      - [SARD의 경우](#sard의-경우)
      - [CVE의 경우](#cve의-경우)
-   - [분석 결과물 수집](#분석-결과물-수집)
+   - [AI 취약점 탐지 결과물 수집](#ai-취약점-탐지-결과물-수집)
      - [분석 관련 FAQ](#분석-관련-faq) 
    - [README.md 작성 가이드](#readmemd-작성-가이드)
 3. [기여 방법](#기여-방법)
 4. [문의 사항](#문의-사항)
 
 ## 목표 산출물
-CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`, `slicer_result.json`, `slicer_result.symbolized.json`, `test_output.csv`, `vectors.json` 형식으로 정리합니다.
+CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리합니다.
 
 ```
 /CWE134_FSB/
@@ -39,20 +39,18 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
 
 ## 절차
 ### 환경 준비
-시작에 앞서 [KSignSlicer](https://github.com/seokjeon/KSignSlicer) 동작 환경을 준비해주시기 바랍니다. 
+먼저 [KSignSlicer](https://github.com/seokjeon/KSignSlicer) 동작 환경을 준비하십시오. 
 
-특히, test_output.csv 추출을 위해서는 **모델 학습이 반드시 선행되어야** 합니다.
+특히, **모델 학습이 반드시 선행되어 있어야** test_output.csv 추출이 가능합니다.
 
 ※ KSignSlicer 저장소 권한이 필요한 경우, 담당자(sojeon@jnu.ac.kr)에게 **GitHub 사용자명과 함께 요청**해 주시기 바랍니다.
 
 ### vuln_src.c 선별
 #### 분석할 취약점 선택 방법
 ##### SARD의 경우
-- 할당 받은 CWE 중 [SARD Juliet C/C++ 1.3](https://samate.nist.gov/SARD/test-suites/112)에서 해당 CWE 코드 2개 자유롭게 선택
+- 할당 받은 CWE 중 [SARD Juliet C/C++ 1.3](https://samate.nist.gov/SARD/test-suites/112)에서 해당 CWE 코드 3개 선택
   
 ※ KSign 영상 자료인 '합본) 모델 설계'와의 버전 호환을 위해, 최신 버전(v1.3.1 with extra support)이 아닌 v1.3 버전을 사용
-
-※ [Joern-CWE-Analysis](https://github.com/alpakalee/Joern-CWE-Analysis)에서 이미 분석한 취약점들은 샘플로 미리 입력해두었으니 참고용으로 활용 가능
 
 ##### CVE의 경우
 - 할당 받은 CWE 중 [BigVul](https://huggingface.co/datasets/bstee615/bigvul)에서 CVE 3개 자유롭게 선택
@@ -66,10 +64,10 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
   → A, B 파일 모두 업로드
 - SARD: 해당 취약 코드 전체 업로드
 
-### 분석 결과물 수집
-[KSignSlicer의 사용법](https://github.com/seokjeon/KSignSlicer?tab=readme-ov-file#%EC%82%AC%EC%9A%A9%EB%B2%95)을 따라 명령을 수행한 후 프로젝트 폴더 구조를 참조하여 필요한 분석 결과물 수집
+### AI 취약점 탐지 결과물 수집
+[KSignSlicer 사용법](https://github.com/seokjeon/KSignSlicer?tab=readme-ov-file#%EC%82%AC%EC%9A%A9%EB%B2%95)에 따라 필요한 AI 탐지 결과물을 수집합니다.
 
-* SARD의 경우, 계산된 라벨의 원본을 보존하기 위해 -genTest 옵션 없이 실행해야 합니다.
+> ⚠️ SARD의 경우, 라벨 보존을 위해 -genTest 옵션 없이 실행해야 합니다.
   
 #### 수집 대상 파일
 * slicer_result.json
@@ -84,20 +82,35 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 `vuln_src.c`, `README.md`,
 `docker cp ksigncontainer:/KSignSlicer/output/{proj_name}/slicer_result.json .`
 
 ##### ※ 분석 중 에러 발생 시, 대응 방안
-[다음](https://github.com/seokjeon/SARD-vs-CVE/tree/main/CWE78_OS_CI/CVE-2019-13638*#-%EA%B0%9C%EC%9A%94)과 같이 
+[예시 링크](https://github.com/seokjeon/SARD-vs-CVE/tree/main/CWE78_OS_CI/CVE-2019-13638*#-%EA%B0%9C%EC%9A%94)와 같이 
 - [ ] 폴더 명 뒤에 *를 붙이고 (예, CVE-2019-13638\*)
 - [ ] README 상단에 어떤 명령어를 실행해서 어떤 에러가 나왔는지 기록 
 
-### README.md 작성 가이드
-<고민(업데이트) 중>
+### AI 취약점 탐지 결과물 분석
+SARD 데이터에서 AI가 취약하다고 탐지한 코드를 우선 선정하여 결과물을 수집하고, 이를 CVE와 비교 분석하십시오.
 
-- [ ] 폴더 명
-- [ ] 취약 동작 요약 (버그 발생 조건, 트리거 흐름)
-- [ ] root cause (source → sink 흐름 요약)
-- [ ] AI 모델이 탐지/실패한 이유  
-  - 슬라이스가 너무 짧음/과다함  
-  - 의미 노드 누락 (예: sink 없음)  
-  - 벡터 표현이 학습 데이터와 상이
+#### SARD 분석 절차
+
+1. CWE에 해당하는 모든 소스코드를 converged 폴더에 수집합니다.
+2. KSignSlicer의 test.py 실행 후 test_output.csv에서 AI 모델이 취약점으로 탐지한 소스코드를 확인합니다.
+3. 취약점이 탐지된 소스코드 중 3개를 선정하여 [AI 취약점 탐지 결과물을 수집](#ai-취약점-탐지-결과물-수집)을 수행합니다.
+4. SARD 템플릿에 따라 각 파일에 대한 README를 작성합니다.
+
+#### CVE 분석 절차
+1. test_result.csv에서 CVE 설명의 criterion(취약 관련 함수) 또는 **caller(호출 함수)**로 필터링해, 취약 슬라이스 존재 여부를 확인합니다.
+2. 취약 슬라이스가 없다면:
+- 소스코드 내 취약점 존재 여부를 재확인합니다.
+- slicer.py의 l_funcs에 해당 함수가 없는지 확인합니다.
+- 슬라이스가 없는 이유를 README에 기록합니다.
+3. 오탐 슬라이스가 있다면: 
+- SARD의 탐지된 코드 및 test_output.csv, 벡터 내용을 비교 분석합니다.
+  - 문법의 복잡성이 차이 여부
+  - 벡터의 길이가 너무 짧거나, 너무 길어서 주요 내용이 누락된 경우
+  - source -> sink 흐름이 SARD와 상이한 경우
+4. 탐지된 취약 슬라이스의 총 개수, 정탐 및 오탐 개수를 기록하고, 오탐 사유를 README에 함께 정리합니다.
+
+### README.md 작성 가이드
+`templates` 폴더에 있는 `SARD.md`와 `CVE.md` 템플릿 파일을 확인해주시기 바랍니다.
 
 ## 기여 방법
 "포크 앤 풀" Git 워크플로를 따르세요:
