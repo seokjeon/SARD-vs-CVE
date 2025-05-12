@@ -1,15 +1,16 @@
-# 📁 폴더명
+# 📁 CVE-2019-16718
 
-**🔗 커밋 링크**: \[commit\_link\_here] | **🔗 CVE 링크**: \[cve\_link\_here]
+**🔗 [커밋 링크](https://github.com/radareorg/radare2/commit/dd739f5a45b3af3d1f65f00fe19af1dbfec7aea7)** | **🔗 [CVE 링크](https://www.cvedetails.com/cve/CVE-2019-16718)**
 
-| 총 슬라이스 수 |  정탐 | 미탐 |
+| 총 슬라이스 수* |  정탐 | 미탐 |
 | --------  | -- | -- |
 | 2개       | 0개 | 2개 |
+
+\* cve 설명에 나온 취약한 함수에 대한 슬라이스만 고려
 
 ## 🔍 취약점 설명
 > 어떤 프로그램의 어떤 기능에 있는 어떤 함수에서 발생한 어떤 취약점입니다.
 
-* **입력 경로**: 사용자 입력 (예: 네트워크 / 파일 / 키보드 등)
 * **취약 조건**: (예: `free()` 호출 이후 해당 포인터 재사용)
 * **취약 동작**: 입력값을 검증하지 않고 `system()` / `execl()` / 등의 위험한 함수 혹은 구문에 사용
 
@@ -30,27 +31,6 @@
 **문제점**:
 사용자 입력이 적절히 검증되지 않은 채로 `system()` 함수의 인자로 사용되어 **명령어 인젝션**이 발생할 수 있음.
 
-#### Source: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:60`
-```c
-...
-// 예시 취약 코드
-if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL) /* POTENTIAL FLAW */
-...
-CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);
-```
-
-#### Trace
-없으면 제외 가능
-```c
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(wchar_t * data)
-{
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(data);
-}
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(wchar_t * data)
-{
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(data);
-}
-```
 
 #### Sink: `CWE78_OS_Command_Injection__wchar_t_console_execl_53d.c:50`
 ```c
@@ -61,7 +41,6 @@ void CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(wchar_t * dat
     EXECL(COMMAND_INT_PATH, COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL);  /* POTENTIAL FLAW */
 }
 ```
-
 
 ### ✅ 개선 코드
 
