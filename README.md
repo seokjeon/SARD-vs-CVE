@@ -25,6 +25,8 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 │   ├── after_{원본 파일명}.c
 │   ├── CVE-2021-1234.diff              # 이왕이면 git diff
 │   ├── README.md
+│   ├── slicer_result.json
+│   ├── slicer_result.symbolized.json
 │   ├── test_output.csv
 │   └── vectors.json
 ├── SARD-wchar_t_file_printf_63/
@@ -71,6 +73,8 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 * test_output.csv
 
 #### 분석 관련 FAQ
+* 분석에 도움이 되는 팁들 있으시면 PR 환영합니다
+
 ##### ※ Docker 컨테이너에서 파일 복사 방법
 예) 컨테이너 이름이 ksigncontainer이고, 결과 디렉토리가 /KSignSlicer/output/{proj_name}인 경우: 
 
@@ -83,6 +87,14 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 
 ##### ※ diff 파일 추출 방법
 `wget https://github.com/username/repo/commit/abc1234.diff`
+
+##### ※ csv를 엑셀로 확인할 때, 
+엑셀에서 데이터가 존재하는 모든 row들의 높이를 일괄적으로 설정하려면, 먼저 해당 row들을 선택하고, "홈" 탭에서 "서식" -> "행 높이"를 선택하여 원하는 높이 값을 입력하면 됩니다. 엑셀의 행 높이 설정은 모든 셀에 동일하게 적용됩니다.
+
+##### ※ csv를 markdown 테이블로 변환 방법 
+엑셀에서 데이터가 존재하는 모든 row들의 높이를 일괄적으로 설정하려면, 먼저 해당 row들을 선택하고, "홈" 탭에서 "서식" -> "행 높이"를 선택하여 원하는 높이 값을 입력하면 됩니다. 엑셀의 행 높이 설정은 모든 셀에 동일하게 적용됩니다.
+
+[온라인 csv to md  table 변환 사이트](https://www.convertcsv.com/csv-to-markdown.htm)
 
 ### AI 취약점 탐지 결과물 분석
 SARD 데이터에서 AI가 취약하다고 탐지한 코드를 우선 선정하여 결과물을 수집하고, 이를 CVE와 비교 분석하십시오.
