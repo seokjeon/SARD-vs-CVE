@@ -64,13 +64,9 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 - SARD: 해당 취약 코드 전체 업로드
 
 ### AI 취약점 탐지 결과물 수집
-[KSignSlicer 사용법](https://github.com/seokjeon/KSignSlicer?tab=readme-ov-file#%EC%82%AC%EC%9A%A9%EB%B2%95)에 따라 필요한 AI 탐지 결과물을 수집합니다.
+[KSignSlicer 사용법](https://github.com/seokjeon/KSignSlicer?tab=readme-ov-file#%EC%82%AC%EC%9A%A9%EB%B2%95)에 따라 AI 탐지를 수행하고, 그 결과물은 [목표 산출물](#목표-산출물)과 같이 수집합니다. 
 
 > ⚠️ SARD의 경우, 라벨 보존을 위해 -genTest 옵션 없이 실행해야 합니다.
-  
-#### 수집 대상 파일
-* vectors.json
-* test_output.csv
 
 #### 분석 관련 FAQ
 * 분석에 도움이 되는 팁들 있으시면 PR 환영합니다
