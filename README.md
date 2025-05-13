@@ -25,6 +25,8 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 │   ├── after_{원본 파일명}.c
 │   ├── CVE-2021-1234.diff              # 이왕이면 git diff
 │   ├── README.md
+│   ├── slicer_result.json
+│   ├── slicer_result.symbolized.json
 │   ├── test_output.csv
 │   └── vectors.json
 ├── SARD-wchar_t_file_printf_63/
