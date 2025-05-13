@@ -1,17 +1,29 @@
 # 📁 SARD-wchar_t_console_execl_53
 
-**🔗 CWE 링크**: [CWE-78](https://cwe.mitre.org/data/definitions/78.html)
-
-| 총 슬라이스 수 | 라벨 1 (취약) | 라벨 0 (정상) | 정탐 | 미탐 |
-| -------- | --------- | --------- | -- | -- |
-| 2개       | 0개        | 2개        | 0개 | 2개 |
-
-
-## 🔍 취약점 설명
+## 🔍 취약점 개요
+* **취약점 종류**: [[CWE-78](https://cwe.mitre.org/data/definitions/78.html)] OS Command Injection
 * **Source**: wchar_t_console
 * **취약 조건**: 입력값 검증 부재
 * **Sink**: execl()
 
+## 탐지 결과 요약
+총 슬라이스 수: 2개
+- KSignSlicer가
+    - 라벨 1(취약)으로 계산: 0개
+    - 라벨 0(정상)으로 계산: 2개
+- AI 모델이 
+    - 취약으로 탐지: 0개
+    - 정상으로 탐지: 2개
+
+### 탐지 결과
+
+|FileName                                               |Caller                                                  |Source|Sink |idx|CWE-ID|category      |criterion|line|label|token_length|predict|
+|-------------------------------------------------------|--------------------------------------------------------|------|-----|---|------|--------------|---------|----|-----|------------|-------|
+|CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c|CWE78_OS_Command_Injection__wchar_t_console_execl_53_bad|False |False|0  |CWE-78|CallExpression|wcslen   |55  |0    |98          |0      |
+|CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c|CWE78_OS_Command_Injection__wchar_t_console_execl_53_bad|False |False|1  |CWE-78|CallExpression|wcslen   |64  |0    |98          |0      |
+
+
+## 취약점 세부 사항
 ### 📁 관련 파일 소개
 파일 한개 면, 작성 안하셔도 됩니다.
 
