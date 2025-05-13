@@ -6,6 +6,10 @@
 | -------- | --------- | --------- | -- | -- |
 | 8개       | 7개        | 1개        | 7개 | 1개 |
 
+## 용어 정의
+- **Source**: 외부(사용자·네트워크) 입력이 코드에 유입되는 지점  
+- **Trace**: 그 입력이 함수 호출·변수 대입을 거치며 어떻게 흘러가는지(데이터 전파 경로)  
+- **Sink**: 검증되지 않은 입력이 실제로 위험한 함수(명령 실행, 파일 쓰기 등)에 사용돼 취약점을 일으키는 지점
 
 ## 🔍 취약점 설명
 * **Source**: char_connect_socket()
@@ -16,56 +20,78 @@
 
 | 파일명       | 설명                      |
 | --------- | ----------------------- |
-| `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c` | 데이터 입력 후 전달 |
+| `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c` | 사용자가 데이터를 입력하면 버퍼에 적재한뒤 셸에 버퍼주소를 인자로 전달하여 명령수행 |
 
 ---
 
 ### ❗️ 취약 코드
 **문제점**:
-사용자 입력이 적절히 검증되지 않은 채로 `execl()` 함수의 인자로 사용되어 **명령어 인젝션**이 발생할 수 있음.
+사용자 입력이 적절히 검증되지 않은 채로 `EXECL()` 함수의 4번째 인자 (COMMAND_ARG3) 로 사용되어 **명령어 인젝션**이 발생할 수 있음.
 
-#### Source: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:60`
+#### Source: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:86-113`
 ```c
-...
-// 예시 취약 코드
-if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL) /* POTENTIAL FLAW */
-...
-CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);
+size_t dataLen = strlen(data);
+/* POTENTIAL FLAW: Read data using a connect socket */
+recvResult = recv(connectSocket,
+                  data + dataLen,
+                  100 - dataLen - 1,
+                  0);
+
 ```
 
-#### Trace
+#### Trace: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:144,63,146`
 ```c
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(wchar_t * data)
+myUnion.unionFirst = data;
+// …
+typedef union
 {
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(data);
+    char * unionFirst;
+    char * unionSecond;
 }
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(wchar_t * data)
-{
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(data);
-}
+// …
+char * data = myUnion.unionSecond;
+
 ```
 
-#### Sink: `CWE78_OS_Command_Injection__wchar_t_console_execl_53d.c:50`
+#### Sink: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:149`
 ```c
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(wchar_t * data)
-{
-    /* wexecl - specify the path where the command is located */
-    /* POTENTIAL FLAW: Execute command without validating input possibly leading to command injection */
-    EXECL(COMMAND_INT_PATH, COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL);
-}
+/* POTENTIAL FLAW: Execute command without validating input */
+EXECL(COMMAND_INT_PATH,
+      COMMAND_INT_PATH,
+      COMMAND_ARG1,
+      data, // 전처리기 지시자에 의해 COMMAND_ARG3 가 data로 전환
+      NULL);
+
 ```
 
 ### ✅ 개선 코드
 
-**패치 위치**: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:89`
+**패치 위치**: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:131`
 
 ```c
-    wchar_t dataBuffer[100] = COMMAND_ARG2; //COMMAND_ARG2 = "ls "
-    data = dataBuffer;
-    wcscat(data, L"*.*"); // concat to "ls *.*" which means enumerate all files in cwd"
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53b_goodG2BSink(data);
+    /* === [추가] 허용 문자 검증 (화이트리스트) === */
+    for (size_t i = dataLen; i < strlen(data); ++i) {
+        char c = data[i];
+        /* 영숫자, 점(.), 밑줄(_), 대시(-), 슬래시(/)만 허용 */
+        if (!isalnum((unsigned char)c) &&
+            c != '.' && c != '_' && c != '-' && c != '/')
+        {
+            fprintf(stderr, "Invalid character in input: '%c'\n", c);
+            return;
+        }
+    }
+
+    /* === [추가] 쉘 파싱 회피: execv 사용 === */
+    char *argv[] = { COMMAND_INT, data + dataLen, NULL };
+    /* COMMAND_INT_PATH 예: "/bin/ls", COMMAND_INT 예: "ls" */
+    execv(COMMAND_INT_PATH, argv);
+
+    /* 기존 execl 호출은 더 이상 사용하지 않습니다. */
+
 ```
 
 **개선 방법**:
 
-* 사용자 입력 대신 미리 정의된 안전한 문자열을 사용하여, 명령어 인자로의 사용자 입력 전달을 차단함으로써 명령어 인젝션을 방지합니다.
+* 1. `화이트 리스트` : 사용자 입력 대신 미리 정의된 안전한 문자열을 사용하여, 명령어 인자로의 사용자 입력 전달을 차단함으로써 명령어 인젝션을 방지합니다.
+* 2. `execv를 사용하여 셸 파싱 회피` : 지정한 경로의 하나의 프로그램만 실행되며, 문자열 전체를 셸이 파싱하지 않기에, 사용자 입력이 메타문자로 해석되어 추가 명령을 실행시키는 공격 벡터가 사라집니다.
+
