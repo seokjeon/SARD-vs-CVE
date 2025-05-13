@@ -78,8 +78,11 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 
 ##### ※ 분석 중 에러 발생 시, 대응 방안
 [예시 링크](https://github.com/seokjeon/SARD-vs-CVE/tree/main/CWE78_OS_CI/CVE-2019-13638*#-%EA%B0%9C%EC%9A%94)와 같이 
-- [ ] 폴더 명 뒤에 *를 붙이고 (예, CVE-2019-13638\*)
+- [ ] 폴더 명 뒤에 \~를 붙이고 (예, CVE-2019-13638\~)
 - [ ] README 상단에 어떤 명령어를 실행해서 어떤 에러가 나왔는지 기록 
+
+##### ※ diff 파일 추출 방법
+`wget https://github.com/username/repo/commit/abc1234.diff`
 
 ### AI 취약점 탐지 결과물 분석
 SARD 데이터에서 AI가 취약하다고 탐지한 코드를 우선 선정하여 결과물을 수집하고, 이를 CVE와 비교 분석하십시오.
