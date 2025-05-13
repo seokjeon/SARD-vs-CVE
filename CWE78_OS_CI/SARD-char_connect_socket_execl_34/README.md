@@ -16,56 +16,75 @@
 
 | 파일명       | 설명                      |
 | --------- | ----------------------- |
-| `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c` | 데이터 입력 후 전달 |
+| `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c` | 사용자가 데이터를 입력하면 버퍼에 적재한뒤 셸에 버퍼주소를 인자로 전달하여 명령수행 |
 
 ---
 
 ### ❗️ 취약 코드
 **문제점**:
-사용자 입력이 적절히 검증되지 않은 채로 `execl()` 함수의 인자로 사용되어 **명령어 인젝션**이 발생할 수 있음.
+사용자 입력이 적절히 검증되지 않은 채로 `EXECL()` 함수의 4번째 인자 (COMMAND_ARG3) 로 사용되어 **명령어 인젝션**이 발생할 수 있음.
 
-#### Source: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:60`
+#### Source: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:86-113`
 ```c
-...
-// 예시 취약 코드
-if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL) /* POTENTIAL FLAW */
-...
-CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);
+size_t dataLen = strlen(data);
+/* POTENTIAL FLAW: Read data using a connect socket */
+recvResult = recv(connectSocket,
+                  data + dataLen,
+                  100 - dataLen - 1,
+                  0);
+
 ```
 
-#### Trace
+#### Trace: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:144,63,146`
 ```c
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(wchar_t * data)
+myUnion.unionFirst = data;
+// …
+typedef union
 {
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(data);
+    char * unionFirst;
+    char * unionSecond;
 }
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(wchar_t * data)
-{
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(data);
-}
+// …
+char * data = myUnion.unionSecond;
+
 ```
 
-#### Sink: `CWE78_OS_Command_Injection__wchar_t_console_execl_53d.c:50`
+#### Sink: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:149`
 ```c
-void CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(wchar_t * data)
-{
-    /* wexecl - specify the path where the command is located */
-    /* POTENTIAL FLAW: Execute command without validating input possibly leading to command injection */
-    EXECL(COMMAND_INT_PATH, COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL);
-}
+/* POTENTIAL FLAW: Execute command without validating input */
+EXECL(COMMAND_INT_PATH,
+      COMMAND_INT_PATH,
+      COMMAND_ARG1,
+      data, // 전처리기 지시자에 의해 COMMAND_ARG3 가 data로 전환
+      NULL);
+
 ```
 
 ### ✅ 개선 코드
 
-**패치 위치**: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:89`
+**패치 위치**: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:165`
 
 ```c
-    wchar_t dataBuffer[100] = COMMAND_ARG2; //COMMAND_ARG2 = "ls "
+    /* 외부 입력을 제거하고, 고정된 문자열만을 명령 인자로 쓰도록 바꾼 */
+    char dataBuffer[100] = COMMAND_ARG2; // "dir " 또는 "ls "
     data = dataBuffer;
-    wcscat(data, L"*.*"); // concat to "ls *.*" which means enumerate all files in cwd"
-    CWE78_OS_Command_Injection__wchar_t_console_execl_53b_goodG2BSink(data);
+    /* FIX: Append a fixed string to data (not user / external input) */
+    strcat(data, "*.*");                // → data는 이제 "dir *.*" 또는 "ls *.*"
+    myUnion.unionFirst = data;
+    {
+        char * data = myUnion.unionSecond;
+        /* 여전히 execl을 쓰지만, data에 들어 있는 값은
+           순수히 소스 코드에서 결정된 "*.*" 뿐이므로
+           명령어 인젝션이 불가능 */
+        EXECL(COMMAND_INT_PATH,
+              COMMAND_INT_PATH,
+              COMMAND_ARG1,
+              COMMAND_ARG3,  // data, 즉 "dir *.*" 또는 "ls *.*"
+              NULL);
+    }
+
+
 ```
 
 **개선 방법**:
-
-* 사용자 입력 대신 미리 정의된 안전한 문자열을 사용하여, 명령어 인자로의 사용자 입력 전달을 차단함으로써 명령어 인젝션을 방지합니다.
+* Source(입력 지점)에서 네트워크 코드를 통째로 제거하고, strcat(data, "\*.\*") 로 고정된 \*.\* 만을 덧붙임. execl 은 그대로 사용하지만, 이제 data 가 절대 변조되지 않으므로 인젝션 경로가 사라집니다. “사용자 제어 입력”을 완전히 배제하고 “코드에 박힌 상수만” 사용하는 게 이 패치의 내용입니다.
