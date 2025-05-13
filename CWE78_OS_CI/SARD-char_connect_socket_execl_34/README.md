@@ -6,10 +6,6 @@
 | -------- | --------- | --------- | -- | -- |
 | 8개       | 7개        | 1개        | 7개 | 1개 |
 
-## 용어 정의
-- **Source**: 외부(사용자·네트워크) 입력이 코드에 유입되는 지점  
-- **Trace**: 그 입력이 함수 호출·변수 대입을 거치며 어떻게 흘러가는지(데이터 전파 경로)  
-- **Sink**: 검증되지 않은 입력이 실제로 위험한 함수(명령 실행, 파일 쓰기 등)에 사용돼 취약점을 일으키는 지점
 
 ## 🔍 취약점 설명
 * **Source**: char_connect_socket()
@@ -66,32 +62,29 @@ EXECL(COMMAND_INT_PATH,
 
 ### ✅ 개선 코드
 
-**패치 위치**: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:131`
+**패치 위치**: `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c:165`
 
 ```c
-    /* === [추가] 허용 문자 검증 (화이트리스트) === */
-    for (size_t i = dataLen; i < strlen(data); ++i) {
-        char c = data[i];
-        /* 영숫자, 점(.), 밑줄(_), 대시(-), 슬래시(/)만 허용 */
-        if (!isalnum((unsigned char)c) &&
-            c != '.' && c != '_' && c != '-' && c != '/')
-        {
-            fprintf(stderr, "Invalid character in input: '%c'\n", c);
-            return;
-        }
+    /* 외부 입력을 제거하고, 고정된 문자열만을 명령 인자로 쓰도록 바꾼 */
+    char dataBuffer[100] = COMMAND_ARG2; // "dir " 또는 "ls "
+    data = dataBuffer;
+    /* FIX: Append a fixed string to data (not user / external input) */
+    strcat(data, "*.*");                // → data는 이제 "dir *.*" 또는 "ls *.*"
+    myUnion.unionFirst = data;
+    {
+        char * data = myUnion.unionSecond;
+        /* 여전히 execl을 쓰지만, data에 들어 있는 값은
+           순수히 소스 코드에서 결정된 "*.*" 뿐이므로
+           명령어 인젝션이 불가능 */
+        EXECL(COMMAND_INT_PATH,
+              COMMAND_INT_PATH,
+              COMMAND_ARG1,
+              COMMAND_ARG3,  // data, 즉 "dir *.*" 또는 "ls *.*"
+              NULL);
     }
 
-    /* === [추가] 쉘 파싱 회피: execv 사용 === */
-    char *argv[] = { COMMAND_INT, data + dataLen, NULL };
-    /* COMMAND_INT_PATH 예: "/bin/ls", COMMAND_INT 예: "ls" */
-    execv(COMMAND_INT_PATH, argv);
-
-    /* 기존 execl 호출은 더 이상 사용하지 않습니다. */
 
 ```
 
 **개선 방법**:
-
-* 1. `화이트 리스트` : 사용자 입력 대신 미리 정의된 안전한 문자열을 사용하여, 명령어 인자로의 사용자 입력 전달을 차단함으로써 명령어 인젝션을 방지합니다.
-* 2. `execv를 사용하여 셸 파싱 회피` : 지정한 경로의 하나의 프로그램만 실행되며, 문자열 전체를 셸이 파싱하지 않기에, 사용자 입력이 메타문자로 해석되어 추가 명령을 실행시키는 공격 벡터가 사라집니다.
-
+* Source(입력 지점)에서 네트워크 코드를 통째로 제거하고, strcat(data, "*.*") 로 고정된 *.* 만을 덧붙임. execl 은 그대로 사용하지만, 이제 data 가 절대 변조되지 않으므로 인젝션 경로가 사라집니다. “사용자 제어 입력”을 완전히 배제하고 “코드에 박힌 상수만” 사용하는 게 이 패치의 내용입니다.
