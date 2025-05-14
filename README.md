@@ -33,6 +33,8 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 │   ├── {원본 파일명}.c
 │   ├── README.md
 │   ├── test_output.csv
+│   ├── slicer_result.json
+│   ├── slicer_result.symbolized.json
 │   └── vectors.json
 ```
 
@@ -88,8 +90,6 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 엑셀에서 데이터가 존재하는 모든 row들의 높이를 일괄적으로 설정하려면, 먼저 해당 row들을 선택하고, "홈" 탭에서 "서식" -> "행 높이"를 선택하여 원하는 높이 값을 입력하면 됩니다. 엑셀의 행 높이 설정은 모든 셀에 동일하게 적용됩니다.
 
 ##### ※ csv를 markdown 테이블로 변환 방법 
-엑셀에서 데이터가 존재하는 모든 row들의 높이를 일괄적으로 설정하려면, 먼저 해당 row들을 선택하고, "홈" 탭에서 "서식" -> "행 높이"를 선택하여 원하는 높이 값을 입력하면 됩니다. 엑셀의 행 높이 설정은 모든 셀에 동일하게 적용됩니다.
-
 [온라인 csv to md  table 변환 사이트](https://www.convertcsv.com/csv-to-markdown.htm)
 
 ### AI 취약점 탐지 결과물 분석
