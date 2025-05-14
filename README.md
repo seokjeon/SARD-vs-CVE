@@ -29,13 +29,21 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 │   ├── slicer_result.symbolized.json
 │   ├── test_output.csv
 │   └── vectors.json
-├── SARD-wchar_t_file_printf_63/
-│   ├── {원본 파일명}.c
-│   ├── README.md
-│   ├── test_output.csv
-│   ├── slicer_result.json
-│   ├── slicer_result.symbolized.json
-│   └── vectors.json
+└── SARD
+    ├── wchar_t_file_printf_63/
+    │   ├── {원본 파일명}.c
+    │   ├── README.md
+    │   ├── test_output.csv
+    │   ├── slicer_result.json
+    │   ├── slicer_result.symbolized.json
+    │   └── vectors.json
+    └── short_max_square_32/
+        ├── {원본 파일명}.c
+        ├── README.md
+        ├── slicer_result.json
+        ├── slicer_result.symbolized.json
+        ├── test_output.csv
+        └── vectors.json
 ```
 
 ## 절차
