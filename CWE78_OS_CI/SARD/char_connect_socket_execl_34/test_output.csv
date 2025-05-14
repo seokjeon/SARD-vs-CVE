@@ -1,0 +1,9 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad,False,False,0,CWE-78,CallExpression,strlen,86,0,274,0
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad,False,False,1,CWE-78,CallExpression,socket,97,0,241,0
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad,False,False,2,CWE-78,CallExpression,memset,102,0,129,0
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad,False,False,3,CWE-78,CallExpression,connect,106,0,221,0
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad,False,False,4,CWE-78,CallExpression,recv,113,0,310,0
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad,False,False,5,CWE-78,CallExpression,strchr,121,0,302,0
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad,False,False,6,CWE-78,CallExpression,strchr,126,0,302,0
+CWE78_OS_Command_Injection__char_connect_socket_execl_34.c,goodG2B,False,False,7,CWE-78,CallExpression,strcat,165,1,64,1

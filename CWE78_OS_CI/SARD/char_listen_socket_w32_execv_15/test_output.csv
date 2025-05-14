@@ -1,0 +1,9 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15_bad,False,False,0,CWE-78,CallExpression,strlen,79,0,292,0
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15_bad,False,False,1,CWE-78,CallExpression,socket,90,0,336,0
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15_bad,False,False,2,CWE-78,CallExpression,memset,95,0,177,0
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15_bad,False,False,3,CWE-78,CallExpression,recv,113,0,368,0
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15_bad,False,False,4,CWE-78,CallExpression,strchr,121,0,320,0
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15_bad,False,False,5,CWE-78,CallExpression,strchr,126,0,320,0
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,goodG2B1,False,False,6,CWE-78,CallExpression,strcat,180,1,40,1
+CWE78_OS_Command_Injection__char_listen_socket_w32_execv_15.c,goodG2B2,False,False,7,CWE-78,CallExpression,strcat,201,1,40,1

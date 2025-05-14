@@ -1,0 +1,6 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,0,CWE-78,CallExpression,strlen,60,0,163,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,1,CWE-78,CallExpression,fopen,65,0,104,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,2,CWE-78,CallExpression,fgets,69,0,182,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,CWE78_OS_Command_Injection__char_file_w32_spawnvp_34_bad,False,False,3,CWE-78,CallExpression,fclose,75,0,104,0
+CWE78_OS_Command_Injection__char_file_w32_spawnvp_34.c,goodG2B,False,False,4,CWE-78,CallExpression,strcat,104,1,64,1

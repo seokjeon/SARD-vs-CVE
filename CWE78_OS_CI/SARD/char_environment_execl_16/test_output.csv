@@ -1,0 +1,4 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE78_OS_Command_Injection__char_environment_execl_16.c,CWE78_OS_Command_Injection__char_environment_execl_16_bad,False,False,0,CWE-78,CallExpression,strlen,62,0,89,0
+CWE78_OS_Command_Injection__char_environment_execl_16.c,CWE78_OS_Command_Injection__char_environment_execl_16_bad,False,False,1,CWE-78,CallExpression,strncat,68,0,89,0
+CWE78_OS_Command_Injection__char_environment_execl_16.c,goodG2B,False,False,2,CWE-78,CallExpression,strcat,91,1,40,1
