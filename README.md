@@ -30,6 +30,11 @@ CWE별로 CVE와 SARD를 각각 3개 씩 선정하여 다음 형식으로 정리
 │   ├── test_output.csv
 │   └── vectors.json
 └── SARD
+    ├── README.md                       # CWE에 대한 AI의 전반적인 취약점 탐지 경향을 적어주세요
+    ├── vectors.json
+    ├── slicer_result.json
+    ├── slicer_result.symbolized.json
+    ├── test_output.csv
     ├── wchar_t_file_printf_63/
     │   ├── {원본 파일명}.c
     │   ├── README.md
@@ -106,8 +111,8 @@ SARD 데이터에서 AI가 취약하다고 탐지한 코드를 우선 선정하�
 #### SARD 분석 절차
 
 1. CWE에 해당하는 모든 소스코드를 converged 폴더에 수집합니다.
-2. KSignSlicer의 test.py 실행 후 test_output.csv에서 AI 모델이 취약점으로 탐지한 소스코드를 확인합니다.
-3. 취약점이 탐지된 소스코드 중 3개를 선정하여 [AI 취약점 탐지 결과물을 수집](#ai-취약점-탐지-결과물-수집)을 수행합니다.
+2. KSignSlicer의 test.py 실행 후 test_output.csv에서 AI 모델이 취약점으로 탐지한 소스코드를 확인합니다. -> 이 결과는 SARD 바로 밑에 저장
+3. 취약점이 탐지된 소스코드 중 3개를 선정하여 별도로 [AI 취약점 탐지 결과물을 수집](#ai-취약점-탐지-결과물-수집)을 수행합니다. -> 이 결과는 각 소스코드 폴더 밑에 저장
 4. SARD 템플릿에 따라 각 파일에 대한 README를 작성합니다.
 
 #### CVE 분석 절차
@@ -118,10 +123,11 @@ SARD 데이터에서 AI가 취약하다고 탐지한 코드를 우선 선정하�
 - 슬라이스가 없는 이유를 README에 기록합니다.
 3. 오탐 슬라이스가 있다면: 
 - SARD의 탐지된 코드 및 test_output.csv, 벡터 내용을 비교 분석합니다.
+  - criterion 차이
   - 문법의 복잡성이 차이 여부
   - 벡터의 길이가 너무 짧거나, 너무 길어서 주요 내용이 누락된 경우
-  - source -> sink 흐름이 SARD와 상이한 경우
-4. 탐지된 취약 슬라이스의 총 개수, 정탐 및 오탐 개수를 기록하고, 오탐 사유를 README에 함께 정리합니다.
+  - slice에서 source -> sink 흐름이 SARD와 지나치게 상이한 경우 등
+4. README template에 맞게 내용을 정리합니다.
 
 ### README.md 작성 가이드
 `templates` 폴더에 있는 `SARD.md`와 `CVE.md` 템플릿 파일을 확인해주시기 바랍니다.
