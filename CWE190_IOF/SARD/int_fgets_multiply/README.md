@@ -51,7 +51,7 @@ printIntLine(result);
 
 ### ✅ 개선 코드
 
-**패치 위치**: `CWE190_Integer_Overflow__int_fgets_multiply_01.c:89`
+**패치 위치**: `CWE190_Integer_Overflow__int_fgets_multiply_01.c:92`
 
 ```c
 if(data > 0)
