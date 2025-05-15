@@ -111,7 +111,13 @@
 * **Sink**: [취약점 발현 지점]
 
 ## 탐지 결과 요약
-[테스트 결과 통계]
+* **총 슬라이스**: [전체 슬라이스 수]개
+* **KSignSlicer 결과**:
+  - 취약: [취약 슬라이스 수]개
+  - 정상: [정상 슬라이스 수]개
+* **AI 모델 결과**:
+  - 취약: [AI 예측 취약 수]개
+  - 정상: [AI 예측 정상 수]개
 
 ### 탐지 결과
 [test_output.csv의 모든 슬라이스를 포함하는 테이블. 각 행은 하나의 슬라이스를 나타내며, 모든 열(FileName, Caller, Source, Sink, idx, CWE-ID, category, criterion, line, label, token_length, predict)을 포함해야 함]
