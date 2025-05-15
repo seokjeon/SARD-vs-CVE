@@ -29,12 +29,12 @@
 **문제점**:  
 사용자 입력이 적절히 검증되지 않은 채로 `fscanf()` 함수로 읽어들인 값에 1을 더하면서, **char 타입 범위를 초과하여 정수 오버플로우가 발생**할 수 있음.
 
-#### Source: `CWE190_Integer_Overflow__char_fscanf_add_01.c:21`
+#### Source: `CWE190_Integer_Overflow__char_fscanf_add_01.c:27`
 ```c
 fscanf (stdin, "%c", &data);
 ```
 
-#### Sink: `CWE190_Integer_Overflow__char_fscanf_add_01.c:24`
+#### Sink: `CWE190_Integer_Overflow__char_fscanf_add_01.c:30`
 ```c
 char result = data + 1;
 printHexCharLine(result);
@@ -44,7 +44,7 @@ printHexCharLine(result);
 
 ### ✅ 개선 코드
 
-**패치 위치**: `CWE190_Integer_Overflow__char_fscanf_add_01.c:43`
+**패치 위치**: `CWE190_Integer_Overflow__char_fscanf_add_01.c:61`
 
 ```c
 fscanf (stdin, "%c", &data);
