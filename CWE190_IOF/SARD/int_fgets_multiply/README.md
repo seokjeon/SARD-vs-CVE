@@ -41,7 +41,7 @@ if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)
 }
 ```
 
-#### Sink: `CWE190_Integer_Overflow__int_fgets_multiply_01.c:40`
+#### Sink: `CWE190_Integer_Overflow__int_fgets_multiply_01.c:45`
 ```c
 int result = data * 2;
 printIntLine(result);
@@ -51,7 +51,7 @@ printIntLine(result);
 
 ### ✅ 개선 코드
 
-**패치 위치**: `CWE190_Integer_Overflow__int_fgets_multiply_01.c:88`
+**패치 위치**: `CWE190_Integer_Overflow__int_fgets_multiply_01.c:89`
 
 ```c
 if(data > 0)
