@@ -1,24 +1,36 @@
 # 📁 SARD-char_connect_socket_execl_34
 
-**🔗 CWE 링크**: [CWE-78](https://cwe.mitre.org/data/definitions/78.html)
-
-| 총 슬라이스 수 | 라벨 1 (취약) | 라벨 0 (정상) | 정탐 | 미탐 |
-| -------- | --------- | --------- | -- | -- |
-| 8개       | 7개        | 1개        | 7개 | 1개 |
-
-
-## 🔍 취약점 설명
+## 🔍 취약점 개요
+* **취약점 종류**: [[CWE-78](https://cwe.mitre.org/data/definitions/78.html)] OS Command Injection
 * **Source**: char_connect_socket()
 * **취약 조건**: 입력값 검증 부재
 * **Sink**: execl()
 
-### 📁 관련 파일 소개
+## 탐지 결과 요약
+총 슬라이스 수: ８개
+- KSignSlicer가
+    - 라벨 1(취약)으로 계산: １개
+    - 라벨 0(정상)으로 계산: ７개
+- AI 모델이 
+    - 취약으로 탐지: １개
+    - 정상으로 탐지: ７개
 
-| 파일명       | 설명                      |
-| --------- | ----------------------- |
-| `CWE78_OS_Command_Injection__char_connect_socket_execl_34.c` | 사용자가 데이터를 입력하면 버퍼에 적재한뒤 셸에 버퍼주소를 인자로 전달하여 명령수행 |
+### 탐지 결과
+
+|FileName                                               |Caller                                                  |Source|Sink |idx|CWE-ID|category      |criterion|line|label|token_length|predict|
+|-------------------------------------------------------|--------------------------------------------------------|------|-----|---|------|--------------|---------|----|-----|------------|-------|
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad | False    | False  |     0 | CWE-78   | CallExpression | strlen      |     86 |       0 |            274 |         0 |
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad | False    | False  |     1 | CWE-78   | CallExpression | socket      |     97 |       0 |            241 |         0 |
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad | False    | False  |     2 | CWE-78   | CallExpression | memset      |    102 |       0 |            129 |         0 |
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad | False    | False  |     3 | CWE-78   | CallExpression | connect     |    106 |       0 |            221 |         0 |
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad | False    | False  |     4 | CWE-78   | CallExpression | recv        |    113 |       0 |            310 |         0 |
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad | False    | False  |     5 | CWE-78   | CallExpression | strchr      |    121 |       0 |            302 |         0 |
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | CWE78_OS_Command_Injection__char_connect_socket_execl_34_bad | False    | False  |     6 | CWE-78   | CallExpression | strchr      |    126 |       0 |            302 |         0 |
+| CWE78_OS_Command_Injection__char_connect_socket_execl_34.c | goodG2B                                                      | False    | False  |     7 | CWE-78   | CallExpression | strcat      |    165 |       1 |             64 |         1 |
 
 ---
+
+## 취약점 세부 사항
 
 ### ❗️ 취약 코드
 **문제점**:
