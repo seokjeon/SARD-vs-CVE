@@ -60,3 +60,53 @@ fprintf(stdout, "%s\n", data); // ✅ 포맷 명시
 **개선 방법**:
 사용자 입력이 포함된 문자열을 출력할 때는 반드시 "포맷 문자열"을 명시해줘야 함
 "fprintf(stdout, "%s", data);" 형태로 사용하면 포맷 스트링 인젝션 방지 가능
+
+## 🧠 추가 분석 정보
+
+슬라이서가 해당 코드에 대해 취약하다고 판단한 기준은 다음과 같이 예상됩니다.
+
+### 🔎 탐지된 취약 슬라이스의 공통 특징
+
+- `criterion`이 **`fprintf`**이며,
+- 코드에서 포맷 문자열을 명시하지 않고 사용자 입력을 그대로 전달하는 경우:
+
+```c
+fprintf(stdout, data); // ⚠ 포맷 문자열 없음
+```
+
+이와 같은 패턴을 포함한 슬라이스 (idx = 0, idx = 3)는 모두 `label = 1`로 지정되어 있습니다.
+
+즉, 슬라이서는 명확한 Sink(`fprintf`)와 포맷 문자열 미지정 상태를 취약 조건으로 판단하는 것으로 보입니다.
+
+### ⚠ 탐지되지 않은 슬라이스 (`label = 0`)의 특징
+
+`criterion`이 `strlen`, `strncat`, `strcpy` 등이고,
+
+`GETENV()` 호출 또는 `data` 할당/전달만 존재하는 경우:
+
+```c
+char * environment = GETENV(ENV_VARIABLE);
+if (environment != NULL)
+    strncat(data+dataLen, environment, ...);
+```
+
+Sink 함수 호출이 직접 포함되지 않거나,
+
+포맷 문자열이 명시된 경우 (`fprintf(stdout, "%s\n", data);`)는 모두 `label = 0` 처리되었습니다.
+
+### 📌 정리
+
+| 슬라이스 idx | 함수        | criterion | 내용 요약                   | label |
+| :----------: | ----------- | :-------- | :-------------------------- | :----: |
+|      0       | `badSink`   | `fprintf` | 포맷 문자열 없음            |   1    |
+|      3       | `goodG2BSink` | `fprintf` | 고정된 문자열 사용, 포맷 없음 |   1    |
+|      5       | `goodB2GSink` | `fprintf` | 포맷 문자열 있음 (`L"%s"`)  |   0    |
+|   1, 2, 4, 6, 7  | 기타        | `strlen`, `strncat`, `strcpy` | Sink 없음 또는 흐름 불완전    |   0    |
+
+### ✅ 시사점
+
+슬라이서는 `fprintf()` 호출이 있고, 포맷 문자열이 명시되지 않은 경우에만 `label = 1`로 탐지하는 것으로 보입니다.
+
+반대로, Source가 존재하더라도 Sink가 명시적으로 드러나지 않으면 탐지하지 못합니다.
+
+또한, 안전한 형태로 포맷 문자열이 명시되어 있으면 `label = 0`으로 올바르게 처리됩니다.
