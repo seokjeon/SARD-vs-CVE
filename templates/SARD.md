@@ -1,3 +1,7 @@
+# 📁 SARD-wchar_t_console_execl_53
+
+> Juliet 테스트케이스의 wchar_t_console_execl_53 시나리오에서, 콘솔 입력을 검증 없이 execl() 함수에 전달하는 함수 체인(53a → 53b → 53c → 53d)으로 인해 발생한 명령어 인젝션(CWE-78) 취약점입니다.
+
 ## 🔍 취약점 개요
 
 **취약점 종류**: [[CWE-78](https://cwe.mitre.org/data/definitions/78.html)] OS Command Injection

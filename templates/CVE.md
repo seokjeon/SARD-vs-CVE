@@ -1,6 +1,10 @@
+# 📁 CVE-2019-16718
+
 ## 🔍 취약점 개요
 
 **🔗 [커밋 링크](https://github.com/radareorg/radare2/commit/dd739f5a45b3af3d1f65f00fe19af1dbfec7aea7)** | **🔗 [CVE 링크](https://www.cvedetails.com/cve/CVE-2019-16718)**  
+
+> Radare2의 서버 설정 기능에서, 사용자 입력을 검증 없이 system() 함수에 전달하는 add_server() 함수로 인해 발생한 명령어 인젝션(CWE-78) 취약점입니다.
 
 **취약점 종류**: [[CWE-78](https://cwe.mitre.org/data/definitions/78.html)] OS Command Injection
 
@@ -11,6 +15,7 @@
 ---
 
 ## 탐지 결과 요약
+cve 설명에 나온 취약한 함수(Caller)에 대한 슬라이스만 고려했을 때,
 
 총 슬라이스 수: 48개  
 - KSignSlicer가  
@@ -26,7 +31,7 @@ Sink(`system()` 함수) 관련 슬라이스는 1건 있었으나, **정상으로
 
 | FileName  | Caller      | Source | Sink  | idx | CWE-ID | category       | criterion | line | label | token\_length | predict |
 | --------- | ----------- | ------ | ----- | --- | ------ | -------------- | --------- | ---- | ----- | ------------- | ------- |
-| manager.c | add\_server | False  | False | 71  | CWE-78 | CallExpression | system    | 486  | 0     | 67            | 0       |
+| manager.c | add\_server | False  | False | 71  | CWE-   | CallExpression | system    | 486  | -3    | 67            | 0       |
 
 #### SARD는 잘 탐지하는데 이 CVE는 탐지 못했던 이유
 
