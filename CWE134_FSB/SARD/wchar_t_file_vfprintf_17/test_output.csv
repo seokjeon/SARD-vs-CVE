@@ -1,0 +1,7 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c,CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad,False,True,0,CWE-134,CallExpression,wcslen,54,0,120,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c,CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad,False,True,1,CWE-134,CallExpression,fopen,59,0,99,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c,CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad,False,True,2,CWE-134,CallExpression,fclose,69,0,99,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c,goodB2G,False,True,3,CWE-134,CallExpression,wcslen,106,0,120,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c,goodB2G,False,True,4,CWE-134,CallExpression,fopen,111,0,99,0
+CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c,goodB2G,False,True,5,CWE-134,CallExpression,fclose,121,0,99,0
