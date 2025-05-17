@@ -1,0 +1,9 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,badSink,False,True,0,CWE-134,CallExpression,fprintf,42,1,19,1
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_bad,False,True,1,CWE-134,CallExpression,strlen,52,0,89,0
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_bad,False,True,2,CWE-134,CallExpression,strncat,58,0,89,0
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,goodG2BSink,False,True,3,CWE-134,CallExpression,fprintf,74,1,19,1
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,goodG2B,False,True,4,CWE-134,CallExpression,strcpy,83,0,40,1
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,goodB2GSink,False,True,5,CWE-134,CallExpression,fprintf,93,0,21,1
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,goodB2G,False,True,6,CWE-134,CallExpression,strlen,103,0,89,0
+CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c,goodB2G,False,True,7,CWE-134,CallExpression,strncat,109,0,89,0
