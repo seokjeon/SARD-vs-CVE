@@ -153,6 +153,7 @@ void CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(wchar_t * dat
 ---
 
 ### ✅ 개선 코드 (두 가지 이상의 개선 방법이 존재할 경우, 아래와 같이 #### 1, #### 2 형태로 번호를 붙여 모두 제시하세요.)
+소스 코드의 good() or goodG2B() or goodB2G() 함수에 이미 패치 방식이 제시되어 있습니다. 새로운 패치를 제안하기보다는, 패치의 위치와 코드를 중심으로 설명해 주세요.
 
 **패치 위치**: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:89`
 
