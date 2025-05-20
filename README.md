@@ -130,7 +130,7 @@ mkdir -p output/CVE-YYYY-XXXX \
   && python3 tools/KSignSlicer/slicer.py \
        --src data/converged/CVE-YYYY-XXXX \
        --csv data/cpg.csv/CVE-YYYY-XXXX \
-       --output output/CVE-YYYY-XXXX/slicer_result.json
+       --output output/CVE-YYYY-XXXX/slicer_result.json --genTest
 ```
 5. 다음 명령어를 통해 토큰 심볼릭을 수행합니다.
 ```bash
