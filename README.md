@@ -116,18 +116,57 @@ SARD 데이터에서 AI가 취약하다고 탐지한 코드를 우선 선정하�
 4. SARD 템플릿에 따라 각 파일에 대한 README를 작성합니다.
 
 #### CVE 분석 절차
-1. test_result.csv에서 CVE 설명의 criterion(취약 관련 함수) 또는 **caller(호출 함수)**로 필터링해, 취약 슬라이스 존재 여부를 확인합니다.
-2. 취약 슬라이스가 없다면:
-- 소스코드 내 취약점 존재 여부를 재확인합니다.
-- slicer.py의 l_funcs에 해당 함수가 없는지 확인합니다.
-- 슬라이스가 없는 이유를 README에 기록합니다.
-3. 오탐 슬라이스가 있다면: 
-- SARD의 탐지된 코드 및 test_output.csv, 벡터 내용을 비교 분석합니다.
-  - criterion 차이
-  - 문법의 복잡성이 차이 여부
-  - 벡터의 길이가 너무 짧거나, 너무 길어서 주요 내용이 누락된 경우
-  - slice에서 source -> sink 흐름이 SARD와 지나치게 상이한 경우 등
-4. README template에 맞게 내용을 정리합니다.
+1. 선택한 CVE에 대한 폴더를 /KSignSlicer/data/converged 하위에 생성합니다.
+2. 생성된 폴더 /KSignSlicer/data/converged/CVE-YYYY-XXXX 하위에 관련된 모든 소스코드를 이동시킵니다.
+3. /KSignSlicer/data/cpg.csv/CVE-YYYY-XXXX 폴더를 생성한뒤 다음 명령어를 통해 CPG를 생성합니다.
+```bash
+tools/ReVeal/code-slicer/joern/joern-parse data/converged/CVE-YYYY-XXXX \
+  && mv parsed/data/converged/CVE-YYYY-XXXX/ data/cpg.csv/CVE-YYYY-XXXX/ \
+  && rm -rf parsed
+```
+4. 다음명령어를 통해 슬라이스를 생성합니다.
+```bash
+mkdir -p output/CVE-YYYY-XXXX \
+  && python3 tools/KSignSlicer/slicer.py \
+       --src data/converged/CVE-YYYY-XXXX \
+       --csv data/cpg.csv/CVE-YYYY-XXXX \
+       --output output/CVE-YYYY-XXXX/slicer_result.json
+```
+5. 다음 명령어를 통해 토큰 심볼릭을 수행합니다.
+```bash
+python3 tools/KSignSlicer/symbolic_tokenize.py \
+  --src output/CVE-YYYY-XXXX/slicer_result.json \
+  --dst output/CVE-YYYY-XXXX/slicer_result.symbolized.json
+```
+6. 다음 명령어를 통해 모델 테스트를 수행합니다.
+```bash
+cd output/CVE-YYYY-XXXX/ \
+  && python3 ../../tools/KSignSlicer/test.py \
+       --verbose \
+       --test_file slicer_result.symbolized.json \
+       --model_dir ../SARD_Juliet/saved_models \
+  && cd -
+```
+
+7. test_result.csv에서 CVE 설명의 criterion(취약 관련 함수) 또는 **caller(호출 함수)**로 필터링해, 취약 슬라이스 존재 여부를 확인합니다.
+   | Criterion | Slice | CVE 디렉토리       | 처리 / 설명                                                  |
+   |-----------|-------|--------------------|-------------------------------------------------------------|
+   | 있음      | 있음  | `CVE-YYYY-XXXX`    | 정상 진행                                                   |
+   | 있음      | 없음  | `CVE-YYYY-XXXX`    | 슬라이스 누락: 스크립트 오류 / 파일 경로 확인 필요           |
+   | 없음      | 있음  | `CVE-YYYY-XXXX`    | 예외: criterion 정의 없이 슬라이스만 생성 – 별도 검토 필요   |
+   | 없음      | 없음  | `CVE-YYYY-XXXX~`   | 분석 불가: 디렉토리명에 `~` 추가 후 readme.md 분석 불가 사유 기재 |
+
+   - 취약 슬라이스가 없다면:
+      - 소스코드 내 취약점 존재 여부를 재확인합니다.
+      - slicer.py의 l_funcs에 해당 함수가 없는지 확인합니다.
+      - 슬라이스가 없는 이유를 README에 기록합니다.
+   - 오탐 슬라이스가 있다면: 
+      - SARD의 탐지된 코드 및 test_output.csv, 벡터 내용을 비교 분석합니다.
+      - criterion 차이
+      - 문법의 복잡성이 차이 여부
+      - 벡터의 길이가 너무 짧거나, 너무 길어서 주요 내용이 누락된 경우
+      - slice에서 source -> sink 흐름이 SARD와 지나치게 상이한 경우 등
+9. README template에 맞게 내용을 정리합니다.
 
 ### README.md 작성 가이드
 `templates` 폴더에 있는 `SARD.md`와 `CVE.md` 템플릿 파일을 확인해주시기 바랍니다.
