@@ -1,0 +1,16 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,CWE400_Resource_Exhaustion__connect_socket_for_loop_08_bad,False,False,0,CWE-400,CallExpression,socket,83,0,197,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,CWE400_Resource_Exhaustion__connect_socket_for_loop_08_bad,False,False,1,CWE-400,CallExpression,memset,88,0,138,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,CWE400_Resource_Exhaustion__connect_socket_for_loop_08_bad,False,False,2,CWE-400,CallExpression,connect,92,0,187,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,CWE400_Resource_Exhaustion__connect_socket_for_loop_08_bad,False,False,3,CWE-400,CallExpression,recv,98,0,214,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,CWE400_Resource_Exhaustion__connect_socket_for_loop_08_bad,False,False,4,CWE-400,CallExpression,atoi,106,0,195,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G1,False,False,5,CWE-400,CallExpression,socket,165,0,197,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G1,False,False,6,CWE-400,CallExpression,memset,170,0,138,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G1,False,False,7,CWE-400,CallExpression,connect,174,0,187,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G1,False,False,8,CWE-400,CallExpression,recv,180,0,214,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G1,False,False,9,CWE-400,CallExpression,atoi,188,0,213,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G2,False,False,10,CWE-400,CallExpression,socket,251,0,197,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G2,False,False,11,CWE-400,CallExpression,memset,256,0,138,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G2,False,False,12,CWE-400,CallExpression,connect,260,0,187,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G2,False,False,13,CWE-400,CallExpression,recv,266,0,214,0
+CWE400_Resource_Exhaustion__connect_socket_for_loop_08.c,goodB2G2,False,False,14,CWE-400,CallExpression,atoi,274,0,211,0

@@ -1,3 +1,4 @@
+
 # **Slicer가 CWE476의 코드 파일을 읽지 못하는 문제 발생**
 
 ### (.ksign_slicer) root@1ee3bca3aaea:/KSignSlicer# tools/ReVeal/code-slicer/joern/joern-parse data/converged/CWE476_cases     && mv parsed/data/converged/CWE476_cases/ data/cpg.csv/     && rm data/cpg.csv/CWE476_cases/*.csv     && rm -rf parsed
@@ -42,3 +43,6 @@
 ###    super().__init__(open(name, mode))
 ###                     ^^^^^^^^^^^^^^^^
 ### FileNotFoundError: [Errno 2] No such file or directory: '../SARD_Juliet/saved_models/checkpoint-best-acc/model.bin'
+=======
+# CWE476에 대한 모델 테스트 결과
+**본 결과는 슬라이서와 모델이 동일한 예측을 수행했으나, 근본적으로 취약한 코드에 대한 라벨링이 이루어지지 않음을 확인함.**

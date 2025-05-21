@@ -1,0 +1,5 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE400_Resource_Exhaustion__fgets_for_loop_44.c,CWE400_Resource_Exhaustion__fgets_for_loop_44_bad,False,True,0,CWE-400,CallExpression,fgets,46,0,48,0
+CWE400_Resource_Exhaustion__fgets_for_loop_44.c,CWE400_Resource_Exhaustion__fgets_for_loop_44_bad,False,True,1,CWE-400,CallExpression,atoi,49,0,56,0
+CWE400_Resource_Exhaustion__fgets_for_loop_44.c,goodB2G,False,True,2,CWE-400,CallExpression,fgets,113,0,48,0
+CWE400_Resource_Exhaustion__fgets_for_loop_44.c,goodB2G,False,True,3,CWE-400,CallExpression,atoi,116,0,56,0

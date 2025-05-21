@@ -1,0 +1,5 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE190_Integer_Overflow__int_fgets_multiply_01.c,CWE190_Integer_Overflow__int_fgets_multiply_01_bad,False,False,0,CWE-190,CallExpression,fgets,32,0,60,0
+CWE190_Integer_Overflow__int_fgets_multiply_01.c,CWE190_Integer_Overflow__int_fgets_multiply_01_bad,False,False,1,CWE-190,CallExpression,atoi,35,0,102,0
+CWE190_Integer_Overflow__int_fgets_multiply_01.c,goodB2G,False,False,2,CWE-190,CallExpression,fgets,79,0,60,0
+CWE190_Integer_Overflow__int_fgets_multiply_01.c,goodB2G,False,False,3,CWE-190,CallExpression,atoi,82,0,116,0
