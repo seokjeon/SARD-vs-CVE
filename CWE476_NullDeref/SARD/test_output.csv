@@ -1,0 +1,445 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,slices,tokenized,token_length,predict
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_01.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_01_bad,False,False,0,CWE-476,CallExpression,malloc,24,0,"['        int *intPointer = NULL;\n', '        intPointer = (int *)malloc(sizeof(int));\n', '        *intPointer = 5;\n', '        printIntLine(*intPointer);\n', '        if (intPointer != NULL)\n', '            *intPointer = 10;\n', '        printIntLine(*intPointer);\n']","int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC1(*Var1); 
+",73,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_01.c,good1,False,False,1,CWE-476,CallExpression,malloc,44,0,"['        int *intPointer = NULL;\n', '        intPointer = (int *)malloc(sizeof(int));\n', '        *intPointer = 5;\n', '        printIntLine(*intPointer);\n', '        *intPointer = 10;\n', '        printIntLine(*intPointer);\n']","int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",61,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_06.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_06_bad,False,False,2,CWE-476,CallExpression,malloc,31,0,"['    if(STATIC_CONST_FIVE==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",83,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_06.c,good1,False,False,3,CWE-476,CallExpression,malloc,60,0,"['    if(STATIC_CONST_FIVE!=5)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 != 5)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",73,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_06.c,good2,False,False,4,CWE-476,CallExpression,malloc,77,0,"['    if(STATIC_CONST_FIVE==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",71,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_10.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_10_bad,False,False,5,CWE-476,CallExpression,malloc,26,0,"['    if(globalTrue)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",80,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_10.c,good1,False,False,6,CWE-476,CallExpression,malloc,55,0,"['    if(globalFalse)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",70,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_10.c,good2,False,False,7,CWE-476,CallExpression,malloc,72,0,"['    if(globalTrue)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",68,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_09.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_09_bad,False,False,8,CWE-476,CallExpression,malloc,26,0,"['    if(GLOBAL_CONST_TRUE)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",80,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_09.c,good1,False,False,9,CWE-476,CallExpression,malloc,55,0,"['    if(GLOBAL_CONST_FALSE)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",70,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_09.c,good2,False,False,10,CWE-476,CallExpression,malloc,72,0,"['    if(GLOBAL_CONST_TRUE)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",68,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_14.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_14_bad,False,False,11,CWE-476,CallExpression,malloc,26,0,"['    if(globalFive==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",83,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_14.c,good1,False,False,12,CWE-476,CallExpression,malloc,55,0,"['    if(globalFive!=5)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 != 5)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",73,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_14.c,good2,False,False,13,CWE-476,CallExpression,malloc,72,0,"['    if(globalFive==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",71,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_08.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_08_bad,False,False,14,CWE-476,CallExpression,malloc,39,0,"['    if(staticReturnsTrue())\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC2(*Var1); 
+",82,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_08.c,good1,False,False,15,CWE-476,CallExpression,malloc,68,0,"['    if(staticReturnsFalse())\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+else 
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+*Var1=10; 
+FUNC2(*Var1); 
+",72,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_08.c,good2,False,False,16,CWE-476,CallExpression,malloc,85,0,"['    if(staticReturnsTrue())\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+*Var1=10; 
+FUNC2(*Var1); 
+",70,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_05.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_05_bad,False,False,17,CWE-476,CallExpression,malloc,32,0,"['    if(staticTrue)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",80,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_05.c,good1,False,False,18,CWE-476,CallExpression,malloc,61,0,"['    if(staticFalse)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",70,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_05.c,good2,False,False,19,CWE-476,CallExpression,malloc,78,0,"['    if(staticTrue)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",68,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_12.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_12_bad,False,False,20,CWE-476,CallExpression,malloc,26,0,"['    if(globalReturnsTrueOrFalse())\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n', 'else\n', '            int *intPointer = NULL;\n']","if (FUNC1())
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC2(*Var1); 
+else 
+int *Var1=NULL ; 
+",94,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_12.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_12_bad,False,False,21,CWE-476,CallExpression,malloc,41,0,"['    if(globalReturnsTrueOrFalse())\n', '            int *intPointer = NULL;\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+int *Var1=NULL ; 
+else 
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+*Var1=10; 
+FUNC2(*Var1); 
+",82,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_12.c,good1,False,False,22,CWE-476,CallExpression,malloc,62,0,"['    if(globalReturnsTrueOrFalse())\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n', 'else\n', '            int *intPointer = NULL;\n']","if (FUNC1())
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+*Var1=10; 
+FUNC2(*Var1); 
+else 
+int *Var1=NULL ; 
+",82,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_12.c,good1,False,False,23,CWE-476,CallExpression,malloc,74,0,"['    if(globalReturnsTrueOrFalse())\n', '            int *intPointer = NULL;\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+int *Var1=NULL ; 
+else 
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+*Var1=10; 
+FUNC2(*Var1); 
+",82,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_16.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_16_bad,False,False,24,CWE-476,CallExpression,malloc,26,0,"['    while(1)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","while (1)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC1(*Var1); 
+",79,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_16.c,good1,False,False,25,CWE-476,CallExpression,malloc,51,0,"['    while(1)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","while (1)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",67,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_17.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_17_bad,False,False,26,CWE-476,CallExpression,malloc,27,0,"['    int j;\n', '    for(j = 0; j < 1; j++)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","int  Var1; 
+for (Var1=0; Var1<1; Var1  Var2)
+int *Var3=NULL ; 
+Var3=(int *) malloc(sizeof (int )); 
+*Var3=5; 
+FUNC1(*Var3); 
+if (Var3 != NULL )
+*Var3=10; 
+FUNC1(*Var3); 
+",101,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_17.c,good1,False,False,27,CWE-476,CallExpression,malloc,52,0,"['    int k;\n', '    for(k = 0; k < 1; k++)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","int  Var1; 
+for (Var1=0; Var1<1; Var1  Var2)
+int *Var3=NULL ; 
+Var3=(int *) malloc(sizeof (int )); 
+*Var3=5; 
+FUNC1(*Var3); 
+*Var3=10; 
+FUNC1(*Var3); 
+",89,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_15.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_15_bad,False,False,28,CWE-476,CallExpression,malloc,27,0,"['    switch(6)\n', '        int *intPointer = NULL;\n', '        intPointer = (int *)malloc(sizeof(int));\n', '        *intPointer = 5;\n', '        printIntLine(*intPointer);\n', '        if (intPointer != NULL)\n', '            *intPointer = 10;\n', '        printIntLine(*intPointer);\n']","switch (6)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC1(*Var1); 
+",79,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_15.c,good1,False,False,29,CWE-476,CallExpression,malloc,61,0,"['    switch(5)\n', '        int *intPointer = NULL;\n', '        intPointer = (int *)malloc(sizeof(int));\n', '        *intPointer = 5;\n', '        printIntLine(*intPointer);\n', '        *intPointer = 10;\n', '        printIntLine(*intPointer);\n']","switch (5)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",67,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_15.c,good2,False,False,30,CWE-476,CallExpression,malloc,80,0,"['    switch(6)\n', '        int *intPointer = NULL;\n', '        intPointer = (int *)malloc(sizeof(int));\n', '        *intPointer = 5;\n', '        printIntLine(*intPointer);\n', '        *intPointer = 10;\n', '        printIntLine(*intPointer);\n']","switch (6)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",67,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_18.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_18_bad,False,False,31,CWE-476,CallExpression,malloc,26,0,"['        int *intPointer = NULL;\n', '        intPointer = (int *)malloc(sizeof(int));\n', '        *intPointer = 5;\n', '        printIntLine(*intPointer);\n', '        if (intPointer != NULL)\n', '            *intPointer = 10;\n', '        printIntLine(*intPointer);\n']","int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC1(*Var1); 
+",73,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_18.c,good1,False,False,32,CWE-476,CallExpression,malloc,49,0,"['        int *intPointer = NULL;\n', '        intPointer = (int *)malloc(sizeof(int));\n', '        *intPointer = 5;\n', '        printIntLine(*intPointer);\n', '        *intPointer = 10;\n', '        printIntLine(*intPointer);\n']","int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",61,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_11.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_11_bad,False,False,33,CWE-476,CallExpression,malloc,26,0,"['    if(globalReturnsTrue())\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC2(*Var1); 
+",82,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_11.c,good1,False,False,34,CWE-476,CallExpression,malloc,55,0,"['    if(globalReturnsFalse())\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+else 
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+*Var1=10; 
+FUNC2(*Var1); 
+",72,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_11.c,good2,False,False,35,CWE-476,CallExpression,malloc,72,0,"['    if(globalReturnsTrue())\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (FUNC1())
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC2(*Var1); 
+*Var1=10; 
+FUNC2(*Var1); 
+",70,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_13.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_13_bad,False,False,36,CWE-476,CallExpression,malloc,26,0,"['    if(GLOBAL_CONST_FIVE==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",83,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_13.c,good1,False,False,37,CWE-476,CallExpression,malloc,55,0,"['    if(GLOBAL_CONST_FIVE!=5)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 != 5)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",73,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_13.c,good2,False,False,38,CWE-476,CallExpression,malloc,72,0,"['    if(GLOBAL_CONST_FIVE==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",71,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_02.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_02_bad,False,False,39,CWE-476,CallExpression,malloc,26,0,"['    if(1)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (1)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC1(*Var1); 
+",79,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_02.c,good1,False,False,40,CWE-476,CallExpression,malloc,55,0,"['    if(0)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (0)
+else 
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",69,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_02.c,good2,False,False,41,CWE-476,CallExpression,malloc,72,0,"['    if(1)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (1)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",67,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_03.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_03_bad,False,False,42,CWE-476,CallExpression,malloc,26,0,"['    if(5==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (5== 5)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+if (Var1 != NULL )
+*Var1=10; 
+FUNC1(*Var1); 
+",81,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_03.c,good1,False,False,43,CWE-476,CallExpression,malloc,55,0,"['    if(5!=5)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (5!= 5)
+else 
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",71,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_03.c,good2,False,False,44,CWE-476,CallExpression,malloc,72,0,"['    if(5==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (5== 5)
+int *Var1=NULL ; 
+Var1=(int *) malloc(sizeof (int )); 
+*Var1=5; 
+FUNC1(*Var1); 
+*Var1=10; 
+FUNC1(*Var1); 
+",69,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_04.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_04_bad,False,False,45,CWE-476,CallExpression,malloc,32,0,"['    if(STATIC_CONST_TRUE)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",80,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_04.c,good1,False,False,46,CWE-476,CallExpression,malloc,61,0,"['    if(STATIC_CONST_FALSE)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",70,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_04.c,good2,False,False,47,CWE-476,CallExpression,malloc,78,0,"['    if(STATIC_CONST_TRUE)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",68,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_07.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_07_bad,False,False,48,CWE-476,CallExpression,malloc,31,0,"['    if(staticFive==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            if (intPointer != NULL)\n', '                *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+if (Var2 != NULL )
+*Var2=10; 
+FUNC1(*Var2); 
+",83,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_07.c,good1,False,False,49,CWE-476,CallExpression,malloc,60,0,"['    if(staticFive!=5)\n', 'else\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 != 5)
+else 
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",73,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_07.c,good2,False,False,50,CWE-476,CallExpression,malloc,77,0,"['    if(staticFive==5)\n', '            int *intPointer = NULL;\n', '            intPointer = (int *)malloc(sizeof(int));\n', '            *intPointer = 5;\n', '            printIntLine(*intPointer);\n', '            *intPointer = 10;\n', '            printIntLine(*intPointer);\n']","if (Var1 == 5)
+int *Var2=NULL ; 
+Var2=(int *) malloc(sizeof (int )); 
+*Var2=5; 
+FUNC1(*Var2); 
+*Var2=10; 
+FUNC1(*Var2); 
+",71,0

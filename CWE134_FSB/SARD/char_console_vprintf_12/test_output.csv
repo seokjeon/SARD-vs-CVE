@@ -1,0 +1,13 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,CWE134_Uncontrolled_Format_String__char_console_vprintf_12_bad,False,True,0,CWE-134,CallExpression,strlen,58,0,186,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,CWE134_Uncontrolled_Format_String__char_console_vprintf_12_bad,False,True,1,CWE-134,CallExpression,fgets,63,0,186,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,CWE134_Uncontrolled_Format_String__char_console_vprintf_12_bad,False,True,2,CWE-134,CallExpression,strlen,67,0,186,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,CWE134_Uncontrolled_Format_String__char_console_vprintf_12_bad,False,True,3,CWE-134,CallExpression,strcpy,85,0,186,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodB2G,False,True,4,CWE-134,CallExpression,strlen,136,0,286,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodB2G,False,True,5,CWE-134,CallExpression,fgets,141,0,286,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodB2G,False,True,6,CWE-134,CallExpression,strlen,145,0,286,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodB2G,False,True,7,CWE-134,CallExpression,strlen,164,0,286,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodB2G,False,True,8,CWE-134,CallExpression,fgets,169,0,286,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodB2G,False,True,9,CWE-134,CallExpression,strlen,173,0,286,0
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodG2B,False,True,10,CWE-134,CallExpression,strcpy,232,0,86,1
+CWE134_Uncontrolled_Format_String__char_console_vprintf_12.c,goodG2B,False,True,11,CWE-134,CallExpression,strcpy,237,0,86,1
