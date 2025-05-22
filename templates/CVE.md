@@ -22,7 +22,8 @@ cve 설명에 나온 취약한 함수(Caller)에 대한 슬라이스만 고려�
 
 vdagent_file_xfers_data()에서 추출한 슬라이스 중, Sink(`system()` 함수) 관련 슬라이스는 1건 있었으나, **정상으로 탐지됨**
 
-\* cve 설명에 나온 취약한 함수(Caller) && Sink와 관련된 슬라이스 데이터만 추출
+\* cve 설명에 나온 취약한 함수(Caller) && Sink와 관련된 슬라이스 데이터만 추출.
+\* 이 때, sink 함수명을 slicer_result.json에 검색해보고 나온 모든 슬라이스를 추출 할 것!
 
 | FileName  | Caller      | Source | Sink  | idx | CWE-ID | category       | criterion | line | label | token\_length | predict |
 | --------- | ----------- | ------ | ----- | --- | ------ | -------------- | --------- | ---- | ----- | ------------- | ------- |
@@ -46,8 +47,12 @@ vdagent_file_xfers_data()에서 추출한 슬라이스 중, Sink(`system()` 함�
    - sink에 도달하는 변수가 두 개 이상의 함수에서 조합되다 보니, 슬라이스에 해당 부분이 반영되지 않음.
         기대하는 슬라이스
         ```
+        source(input);
+        input = input+1;
+        system(input);
         ```
         원본 슬라이스
+
         ```c
         // slicer가 추출한 원본을 넣을 것
         system(input);
@@ -56,6 +61,7 @@ vdagent_file_xfers_data()에서 추출한 슬라이스 중, Sink(`system()` 함�
 3. **벡터 단절**
    - 슬라이스에는 취약한 코드가 모두 포함되어 있음.
         idx: x번째 슬라이스
+     
         ``` 
             슬라이스 원본
         ```
