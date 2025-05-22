@@ -131,12 +131,40 @@ system(Var1);
 
 ### ❗️ 취약 코드
 
+#### Source: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c:60` 
+CVE에서 Source 파악이 어려우면 생략 가능
+```c
+...
+// 예시 취약 코드
+if (fgetws(data+dataLen, (int)(100-dataLen), stdin) != NULL) /* POTENTIAL FLAW */
+...
+CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(data);
+```
+
 **문제점**:
 사용자 입력이 적절히 검증되지 않은 채로 `system()` 함수의 인자로 사용되어 **명령어 인젝션**이 발생할 수 있음.
 
+#### Trace
+없으면 제외 가능
 ```c
-char *input = getenv("USER_INPUT");
-system(input);  // 검증 없이 실행
+void CWE78_OS_Command_Injection__wchar_t_console_execl_53b_badSink(wchar_t * data)
+{
+    CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(data);
+}
+void CWE78_OS_Command_Injection__wchar_t_console_execl_53c_badSink(wchar_t * data)
+{
+    CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(data);
+}
+```
+
+#### Sink: `CWE78_OS_Command_Injection__wchar_t_console_execl_53d.c:50`
+```c
+void CWE78_OS_Command_Injection__wchar_t_console_execl_53d_badSink(wchar_t * data)
+{
+    /* wexecl - specify the path where the command is located */
+    /* POTENTIAL FLAW: Execute command without validating input possibly leading to command injection */
+    EXECL(COMMAND_INT_PATH, COMMAND_INT_PATH, COMMAND_ARG1, COMMAND_ARG3, NULL);  /* POTENTIAL FLAW */
+}
 ```
 
 ---
