@@ -2,11 +2,9 @@
 
 ## 🔍 취약점 개요
 
-**🔗 [커밋 링크](https://github.com/radareorg/radare2/commit/dd739f5a45b3af3d1f65f00fe19af1dbfec7aea7)** | **🔗 [CVE 링크](https://www.cvedetails.com/cve/CVE-2019-16718)**  
+**🔗 [커밋 링크](https://github.com/radareorg/radare2/commit/dd739f5a45b3af3d1f65f00fe19af1dbfec7aea7)** | **🔗 [CVE 링크](https://www.cvedetails.com/cve/CVE-2019-16718)**  | **🔗 [CWE 링크](https://cwe.mitre.org/data/definitions/78.html)**  
 
 > Radare2의 서버 설정 기능에서, 사용자 입력을 검증 없이 system() 함수에 전달하는 add_server() 함수로 인해 발생한 명령어 인젝션(CWE-78) 취약점입니다.
-
-**취약점 종류**: [[CWE-78](https://cwe.mitre.org/data/definitions/78.html)] OS Command Injection
 
 * **Source**: 외부에서 제어 가능한 입력값 (예: `getenv`)
 // 생략 가능. 다만, 대규모 코드베이스에서 문제 원인 분석은 좋은 경험이 될 수 있습니다.
@@ -22,7 +20,7 @@ cve 설명에 나온 취약한 함수(Caller)에 대한 슬라이스만 고려�
 | --------  | -- | -- |
 | 48개       | 0개 | 48개 |
 
-Sink(`system()` 함수) 관련 슬라이스는 1건 있었으나, **정상으로 탐지됨**
+vdagent_file_xfers_data()에서 추출한 슬라이스 중, Sink(`system()` 함수) 관련 슬라이스는 1건 있었으나, **정상으로 탐지됨**
 
 \* cve 설명에 나온 취약한 함수(Caller) && Sink와 관련된 슬라이스 데이터만 추출
 
@@ -31,37 +29,45 @@ Sink(`system()` 함수) 관련 슬라이스는 1건 있었으나, **정상으로
 | manager.c | add\_server | False  | False | 71  | CWE-   | CallExpression | system    | 486  | -3    | 67            | 0       |
 
 #### SARD는 잘 탐지하는데 이 CVE는 탐지 못했던 이유
+세가지를 꼭 전부 할 필요는 없습니다. 1 -> 2 -> 3 순으로 원인 규명을 해나가면 될 것으로 보입니다.
 
-AI 모델은 CWE-78의 경우 strcat() 함수가 슬라이스에 존재해야 취약으로 판단하는데, 이 취약점의 경우 system() 함수만 포함되어 있어 정상으로 판단된 것으로 보임.
+1. **부적절한 criterion**
+    - CWE78의 SARD/README.md에 따르면 
+        > ```bash
+        > sojeon@swlab-u2404:~/Documents/research/SARD-vs-CVE/CWE78_OS_CI/SARD$ xsv search -s predict 1 test_output.csv | xsv select criterion | uniq
+        >    criterion
+        >    strcat
+        > ```
+    - 이 취약점의 경우 criterion으로 strcat()이 잡히지 않아 정상으로 판단된 것으로 보임.
 
----
-
-### ⚠️ 탐지 결과 문제점
-
-현재 탐지 결과에서 모든 슬라이스가 정상(라벨 0)으로 판정되었으나, 이는 다음과 같은 기술적 한계로 인한 오탐으로 판단됩니다:
-
-1. **슬라이싱 범위 불완전**
+2. **(예시) 슬라이싱 범위 불완전**
    - 슬라이스가 `system()` 호출 단독 또는 주변 문자열 처리 함수(`strlen`, `snprintf`)만 포함됨
-   - 명령어 조합 과정이 포함되지 않아 실행 컨텍스트를 충분히 반영하지 못함
-   - 📄 근거: `slicer_result.json:idx 혹은 linenumber`, `before_cmd.c:linenumber`, `after_cmd.c:linenumber`
-           혹은 코드 블록 예시
-      ```c
-      // slicer가 추출한 원본을 넣을 것
-      system(input);
-      ```
+   - 슬라이스에 명령어 조합 과정이 포함되지 않아 실행 컨텍스트를 충분히 반영하지 못함
+   - sink에 도달하는 변수가 두 개 이상의 함수에서 조합되다 보니, 슬라이스에 해당 부분이 반영되지 않음.
+        기대하는 슬라이스
+        ```
+        ```
+        원본 슬라이스
+        ```c
+        // slicer가 추출한 원본을 넣을 것
+        system(input);
+        ```
 
-2. **슬라이스 단절 및 단편성**
-   - 명령어 조립 → 실행 흐름이 함수 간 분산되어 있으나 슬라이스는 단일 함수 범위로 제한됨
-   - 그 결과 `input → system()`의 전체 데이터 흐름이 하나의 슬라이스에 담기지 않음
-   - 📄 근거: `manager.c:linenumber`의 슬라이스와 벡터 결과 비교 
-      ```
-      <s>, system, (, Var1, ), ;, </s>
-      ```
+3. **벡터 단절**
+   - 슬라이스에는 취약한 코드가 모두 포함되어 있음.
+        idx: x번째 슬라이스
+        ``` 
+            슬라이스 원본
+        ```
+   - 그러나 벡터 길이 최대 512로 취약 코드에 꼭 필요한 파트가 짤림.
+        ```
+            idx x번째 벡터 원본 ex) <s>, system, (, Var1, ), ;, </s>
+        ```
 
 ## 취약점 세부 사항
 
 ### 📁 관련 파일 소개
-
+파일이 여러개 아니면 생략 가능
 | 파일명            | 설명              |
 | -------------- | --------------- |
 | `before_cmd.c` | 취약 코드 (수정 전) 포함 |
