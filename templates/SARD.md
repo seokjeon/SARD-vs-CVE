@@ -25,81 +25,12 @@ Sink(`execl()` 함수) 관련 슬라이스는 1건 있었으나, **정상으로 
 현재 탐지 결과에서 모든 슬라이스가 정상(라벨 0)으로 판정되었으나, 이는 다음과 같은 기술적 한계로 인한 오탐으로 판단됩니다:
 
 1. **슬라이싱 범위 불완전**
-   - 슬라이스가 `fgetws`, `wcslen` 등 단일 호출만 포함하고, 실제 실행 함수(`execl`)는 포함되지 않음
+   - Sink(`execl()` 함수) 관련 슬라이스는 1건을 살펴보니, `fgetws`, `wcslen` 등 단일 호출만 포함하고, 실제 실행 함수(`execl`)는 포함되지 않음
    - 취약 동작이 발생하는 `53d.c`의 내용이 슬라이스에서 누락됨
-   - 📄 근거: `slicer_result.json`, `CWE78_OS_Command_Injection__wchar_t_console_execl_53d.c`
-
-2. **Source/Sink 식별 실패**
-   - 모든 슬라이스에서 `"Source": false`, `"Sink": false`로 표기됨
-   - 외부 입력 함수인 `fgetws()`가 Source로, 명령 실행 함수 `execl()`이 Sink로 인식되지 않음
-   - 📄 근거: `slicer_result.json`, `test_output.csv`
-
-3. **함수 체인 구조 추적 실패**
-   - 입력값 `data`는 53a → 53b → 53c → 53d 순으로 전달되며 최종적으로 `execl()`에 사용되지만,
-   - 슬라이스는 각 함수 단위로 분절되어 있어 전체 흐름을 반영하지 못함
-   - 📄 근거: `CWE78_OS_Command_Injection__wchar_t_console_execl_53a.c` ~ `53d.c` 파일 및 슬라이스 비교
-
----
-
-## 🧠 추가 분석 정보
-
-### 🔎 Slicer 추출 코드
-
-```c
-fgetws(data + dataLen, (int)(100 - dataLen), stdin);
-```
-- 📄 **근거**: `slicer_result.json`, `slicer_result.symbolized.json`
-- 슬라이스는 단일 `fgetws()` 호출만 포함하고, 이후 실행 흐름(`execl`)은 포함되지 않음
-
----
-
-### 🧩 토큰화된 코드 (심볼화)
-
-```c
-fgetws(stdin, STRING, &Var1);
-```
-- 📄 **근거**: `slicer_result.symbolized.json`
-- 코드 구조는 단순화되었으며, 실행 위험성과 관련된 흐름 정보는 포함되지 않음
-
----
-
-### 🔤 AI 입력 토큰 시퀀스
-
-```
-<s>, fgetws, (, stdin, ,, STRING, ,, &, Var, 1, ), ;, </s>
-```
-- 📄 **근거**: `vectors.json`
-- 토큰 시퀀스가 단순하며 후속 흐름(execl 사용)이 반영되지 않아 위험을 감지하기 어려움
-
----
-
-### 📉 벡터 예측 요약
-
-| idx | label | predict | 입력 길이 | 의미 |
-|-----|-------|---------|------------|------|
-| 0   | 0     | 0       | 11         | AI가 정상 코드로 판단함 |
-| 1   | 0     | 0       | 11         | AI가 정상 코드로 판단함 |
-
-- 📄 **근거**: `test_output.csv`
-- 모든 슬라이스에서 실제 위험 흐름을 반영하지 못해 탐지 실패
-
----
-
-## 🧪 개선 방향 제안
-
-- 슬라이스가 `fgetws` 호출만 포함되어 있어 이후 `execl()` 호출까지의 흐름이 단절됨
-- 입력이 여러 함수를 통해 전달되는 구조(53a → 53b → 53c → 53d)를 슬라이서가 추적하지 못함
-
-1. **슬라이싱 강화**
-   - 함수 체인을 따라 입력 전달 → 실행까지 추적하도록 슬라이싱 로직 개선
-
-2. **Source/Sink 태깅 향상**
-   - `fgetws()`는 Source로, `execl()`은 Sink로 인식되도록 도구 보완 필요
-
-3. **풍부한 토큰 표현**
-   - 단일 API 호출 수준이 아닌, 입력값 조작과 제어 흐름을 포함한 정보 강화 필요
-
----
+   - 📄 근거: `slicer_result.json`의 idx:x 번째 슬라이스
+      ```c
+      fgetws(data + dataLen, (int)(100 - dataLen), stdin);
+      ```
 
 ## 취약점 세부 사항
 
