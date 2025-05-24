@@ -111,13 +111,14 @@ vfwprintf(stdout, data, args); // 포맷 문자열 취약
 
 **패치 위치**: `badVaSinkB → goodB2GVaSinkG`
 
+#### 1. 포맷 문자열 명시
 ```c
 vfwprintf(stdout, L"%s", args); // 포맷 문자열 명시
 ```
 
 **개선 방법**:
 - 외부 입력이 포맷 문자열로 사용되지 않도록 명시적 서식 지정
-- wide string 환경에서는 `%ls`, `%S` 등 확장 서식에 유의
+- `goodB2GVaSinkG` 함수 내에서 적용된 방식
 
 ---
 
