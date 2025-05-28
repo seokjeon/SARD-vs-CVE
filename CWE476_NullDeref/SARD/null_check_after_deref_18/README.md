@@ -74,7 +74,7 @@ printIntLine(*intPointer);
 
 ## ✅ 개선 코드
 
-소스 코드의 good() 함수에 이미 패치 방식이 제시되어 있습니다.
+
 
 패치 위치: CWE476\_NULL\_Pointer\_Dereference\_\_null\_check\_after\_deref\_18.c:49
 
