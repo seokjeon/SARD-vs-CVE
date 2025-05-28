@@ -8,9 +8,9 @@ Juliet 테스트케이스의 CWE476\_NULL\_Pointer\_Dereference\_\_null\_check\_
 
 취약점 종류: \[CWE-476] NULL Pointer Dereference
 
-Source: malloc
-취약 조건: 포인터를 역참조한 후에 NULL 확인을 수행
-Sink: NULL 여부를 확인한 뒤 재역참조 수행
+* Source: malloc
+* 취약 조건: 포인터를 역참조한 후에 NULL 확인을 수행
+* Sink: NULL 여부를 확인한 뒤 재역참조 수행
 
 ---
 
