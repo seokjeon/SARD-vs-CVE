@@ -1,0 +1,3 @@
+FileName,Caller,Source,Sink,idx,CWE-ID,category,criterion,line,label,token_length,predict
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_18.c,CWE476_NULL_Pointer_Dereference__null_check_after_deref_18_bad,False,False,0,CWE-476,CallExpression,malloc,26,0,73,0
+CWE476_NULL_Pointer_Dereference__null_check_after_deref_18.c,good1,False,False,1,CWE-476,CallExpression,malloc,49,0,61,0
