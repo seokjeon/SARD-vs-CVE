@@ -1,1 +1,87 @@
-[{"FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c", "Caller": "CWE190_Integer_Overflow__int_fgets_multiply_01_bad", "Source": false, "Sink": false, "idx": 0, "CWE-ID": "CWE-190", "category": "CallExpression", "criterion": "fgets", "line": 32, "label": 0, "slices": ["    int data;\n", "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n", "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n", "            data = atoi(inputBuffer);\n", "        int result = data * 2;\n"], "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nint  Var4=Var1 *2; \n"}, {"FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c", "Caller": "CWE190_Integer_Overflow__int_fgets_multiply_01_bad", "Source": false, "Sink": false, "idx": 1, "CWE-ID": "CWE-190", "category": "CallExpression", "criterion": "atoi", "line": 35, "label": 0, "slices": ["    int data;\n", "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n", "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n", "            data = atoi(inputBuffer);\n", "    if(data > 0) /* ensure we won't have an underflow */\n", "        int result = data * 2;\n", "        printIntLine(result);\n"], "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nif (Var1>0)/*Var4  Var5  Var6  Var7  Var8  STRUCT1 STRUCT2 */\nint  Var9=Var1 *2; \nFUNC2(Var9); \n"}, {"FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c", "Caller": "goodB2G", "Source": false, "Sink": false, "idx": 2, "CWE-ID": "CWE-190", "category": "CallExpression", "criterion": "fgets", "line": 79, "label": 0, "slices": ["    int data;\n", "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n", "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n", "            data = atoi(inputBuffer);\n", "            int result = data * 2;\n"], "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nint  Var4=Var1 *2; \n"}, {"FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c", "Caller": "goodB2G", "Source": false, "Sink": false, "idx": 3, "CWE-ID": "CWE-190", "category": "CallExpression", "criterion": "atoi", "line": 82, "label": 0, "slices": ["    int data;\n", "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n", "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n", "            data = atoi(inputBuffer);\n", "    if(data > 0) /* ensure we won't have an underflow */\n", "        if (data < (INT_MAX/2))\n", "            int result = data * 2;\n", "            printIntLine(result);\n"], "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nif (Var1>0)/*Var4  Var5  Var6  Var7  Var8  STRUCT1 STRUCT2 */\nif (Var1<(Var9/2))\nint  Var10=Var1 *2; \nFUNC2(Var10); \n"}]
+[
+  {
+    "FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c",
+    "Caller": "CWE190_Integer_Overflow__int_fgets_multiply_01_bad",
+    "Source": false,
+    "Sink": false,
+    "idx": 0,
+    "CWE-ID": "CWE-190",
+    "category": "CallExpression",
+    "criterion": "fgets",
+    "line": 32,
+    "label": 0,
+    "slices": [
+      "    int data;\n",
+      "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n",
+      "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n",
+      "            data = atoi(inputBuffer);\n",
+      "        int result = data * 2;\n"
+    ],
+    "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nint  Var4=Var1 *2; \n"
+  },
+  {
+    "FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c",
+    "Caller": "CWE190_Integer_Overflow__int_fgets_multiply_01_bad",
+    "Source": false,
+    "Sink": false,
+    "idx": 1,
+    "CWE-ID": "CWE-190",
+    "category": "CallExpression",
+    "criterion": "atoi",
+    "line": 35,
+    "label": 0,
+    "slices": [
+      "    int data;\n",
+      "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n",
+      "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n",
+      "            data = atoi(inputBuffer);\n",
+      "    if(data > 0) /* ensure we won't have an underflow */\n",
+      "        int result = data * 2;\n",
+      "        printIntLine(result);\n"
+    ],
+    "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nif (Var1>0)/*Var4  Var5  Var6  Var7  Var8  STRUCT1 STRUCT2 */\nint  Var9=Var1 *2; \nFUNC2(Var9); \n"
+  },
+  {
+    "FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c",
+    "Caller": "goodB2G",
+    "Source": false,
+    "Sink": false,
+    "idx": 2,
+    "CWE-ID": "CWE-190",
+    "category": "CallExpression",
+    "criterion": "fgets",
+    "line": 79,
+    "label": 0,
+    "slices": [
+      "    int data;\n",
+      "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n",
+      "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n",
+      "            data = atoi(inputBuffer);\n",
+      "            int result = data * 2;\n"
+    ],
+    "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nint  Var4=Var1 *2; \n"
+  },
+  {
+    "FileName": "CWE190_Integer_Overflow__int_fgets_multiply_01.c",
+    "Caller": "goodB2G",
+    "Source": false,
+    "Sink": false,
+    "idx": 3,
+    "CWE-ID": "CWE-190",
+    "category": "CallExpression",
+    "criterion": "atoi",
+    "line": 82,
+    "label": 0,
+    "slices": [
+      "    int data;\n",
+      "        char inputBuffer[CHAR_ARRAY_SIZE] = \"\";\n",
+      "        if (fgets(inputBuffer, CHAR_ARRAY_SIZE, stdin) != NULL)\n",
+      "            data = atoi(inputBuffer);\n",
+      "    if(data > 0) /* ensure we won't have an underflow */\n",
+      "        if (data < (INT_MAX/2))\n",
+      "            int result = data * 2;\n",
+      "            printIntLine(result);\n"
+    ],
+    "tokenized": "int  Var1; \nchar  Var2[Var3]=STRING; \nif (fgets(Var2,Var3,stdin) != NULL )\nVar1=FUNC1(Var2); \nif (Var1>0)/*Var4  Var5  Var6  Var7  Var8  STRUCT1 STRUCT2 */\nif (Var1<(Var9/2))\nint  Var10=Var1 *2; \nFUNC2(Var10); \n"
+  }
+]

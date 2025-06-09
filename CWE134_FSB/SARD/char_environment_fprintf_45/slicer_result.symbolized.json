@@ -1,1 +1,165 @@
-[{"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "badSink", "Source": false, "Sink": true, "idx": 0, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "fprintf", "line": 42, "label": 1, "slices": ["    char * data = CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_badData;\n", "    fprintf(stdout, data);\n"], "tokenized": "char *Var1=Var2; \nfprintf(Var3,Var1); \n"}, {"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_bad", "Source": false, "Sink": true, "idx": 1, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "strlen", "line": 52, "label": 0, "slices": ["    char * data;\n", "    char dataBuffer[100] = \"\";\n", "    data = dataBuffer;\n", "        size_t dataLen = strlen(data);\n", "        char * environment = GETENV(ENV_VARIABLE);\n", "        if (environment != NULL)\n", "            strncat(data+dataLen, environment, 100-dataLen-1);\n", "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_badData = data;\n"], "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"}, {"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_bad", "Source": false, "Sink": true, "idx": 2, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "strncat", "line": 58, "label": 0, "slices": ["    char * data;\n", "    char dataBuffer[100] = \"\";\n", "    data = dataBuffer;\n", "        size_t dataLen = strlen(data);\n", "        char * environment = GETENV(ENV_VARIABLE);\n", "        if (environment != NULL)\n", "            strncat(data+dataLen, environment, 100-dataLen-1);\n", "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_badData = data;\n"], "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"}, {"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "goodG2BSink", "Source": false, "Sink": true, "idx": 3, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "fprintf", "line": 74, "label": 1, "slices": ["    char * data = CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodG2BData;\n", "    fprintf(stdout, data);\n"], "tokenized": "char *Var1=Var2; \nfprintf(Var3,Var1); \n"}, {"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "goodG2B", "Source": false, "Sink": true, "idx": 4, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "strcpy", "line": 83, "label": 0, "slices": ["    char * data;\n", "    char dataBuffer[100] = \"\";\n", "    data = dataBuffer;\n", "    strcpy(data, \"fixedstringtest\");\n", "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodG2BData = data;\n"], "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nstrcpy(Var1,STRING); \nVar3=Var1; \n"}, {"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "goodB2GSink", "Source": false, "Sink": true, "idx": 5, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "fprintf", "line": 93, "label": 0, "slices": ["    char * data = CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodB2GData;\n", "    fprintf(stdout, \"%s\\n\", data);\n"], "tokenized": "char *Var1=Var2; \nfprintf(Var3,STRING,Var1); \n"}, {"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "goodB2G", "Source": false, "Sink": true, "idx": 6, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "strlen", "line": 103, "label": 0, "slices": ["    char * data;\n", "    char dataBuffer[100] = \"\";\n", "    data = dataBuffer;\n", "        size_t dataLen = strlen(data);\n", "        char * environment = GETENV(ENV_VARIABLE);\n", "        if (environment != NULL)\n", "            strncat(data+dataLen, environment, 100-dataLen-1);\n", "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodB2GData = data;\n"], "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"}, {"FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c", "Caller": "goodB2G", "Source": false, "Sink": true, "idx": 7, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "strncat", "line": 109, "label": 0, "slices": ["    char * data;\n", "    char dataBuffer[100] = \"\";\n", "    data = dataBuffer;\n", "        size_t dataLen = strlen(data);\n", "        char * environment = GETENV(ENV_VARIABLE);\n", "        if (environment != NULL)\n", "            strncat(data+dataLen, environment, 100-dataLen-1);\n", "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodB2GData = data;\n"], "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"}]
+[
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "badSink",
+    "Source": false,
+    "Sink": true,
+    "idx": 0,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "fprintf",
+    "line": 42,
+    "label": 1,
+    "slices": [
+      "    char * data = CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_badData;\n",
+      "    fprintf(stdout, data);\n"
+    ],
+    "tokenized": "char *Var1=Var2; \nfprintf(Var3,Var1); \n"
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_bad",
+    "Source": false,
+    "Sink": true,
+    "idx": 1,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "strlen",
+    "line": 52,
+    "label": 0,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = \"\";\n",
+      "    data = dataBuffer;\n",
+      "        size_t dataLen = strlen(data);\n",
+      "        char * environment = GETENV(ENV_VARIABLE);\n",
+      "        if (environment != NULL)\n",
+      "            strncat(data+dataLen, environment, 100-dataLen-1);\n",
+      "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_badData = data;\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_bad",
+    "Source": false,
+    "Sink": true,
+    "idx": 2,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "strncat",
+    "line": 58,
+    "label": 0,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = \"\";\n",
+      "    data = dataBuffer;\n",
+      "        size_t dataLen = strlen(data);\n",
+      "        char * environment = GETENV(ENV_VARIABLE);\n",
+      "        if (environment != NULL)\n",
+      "            strncat(data+dataLen, environment, 100-dataLen-1);\n",
+      "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_badData = data;\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "goodG2BSink",
+    "Source": false,
+    "Sink": true,
+    "idx": 3,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "fprintf",
+    "line": 74,
+    "label": 1,
+    "slices": [
+      "    char * data = CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodG2BData;\n",
+      "    fprintf(stdout, data);\n"
+    ],
+    "tokenized": "char *Var1=Var2; \nfprintf(Var3,Var1); \n"
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "goodG2B",
+    "Source": false,
+    "Sink": true,
+    "idx": 4,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "strcpy",
+    "line": 83,
+    "label": 0,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = \"\";\n",
+      "    data = dataBuffer;\n",
+      "    strcpy(data, \"fixedstringtest\");\n",
+      "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodG2BData = data;\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nstrcpy(Var1,STRING); \nVar3=Var1; \n"
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "goodB2GSink",
+    "Source": false,
+    "Sink": true,
+    "idx": 5,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "fprintf",
+    "line": 93,
+    "label": 0,
+    "slices": [
+      "    char * data = CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodB2GData;\n",
+      "    fprintf(stdout, \"%s\\n\", data);\n"
+    ],
+    "tokenized": "char *Var1=Var2; \nfprintf(Var3,STRING,Var1); \n"
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "goodB2G",
+    "Source": false,
+    "Sink": true,
+    "idx": 6,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "strlen",
+    "line": 103,
+    "label": 0,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = \"\";\n",
+      "    data = dataBuffer;\n",
+      "        size_t dataLen = strlen(data);\n",
+      "        char * environment = GETENV(ENV_VARIABLE);\n",
+      "        if (environment != NULL)\n",
+      "            strncat(data+dataLen, environment, 100-dataLen-1);\n",
+      "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodB2GData = data;\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__char_environment_fprintf_45.c",
+    "Caller": "goodB2G",
+    "Source": false,
+    "Sink": true,
+    "idx": 7,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "strncat",
+    "line": 109,
+    "label": 0,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = \"\";\n",
+      "    data = dataBuffer;\n",
+      "        size_t dataLen = strlen(data);\n",
+      "        char * environment = GETENV(ENV_VARIABLE);\n",
+      "        if (environment != NULL)\n",
+      "            strncat(data+dataLen, environment, 100-dataLen-1);\n",
+      "    CWE134_Uncontrolled_Format_String__char_environment_fprintf_45_goodB2GData = data;\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=STRING; \nVar1=Var2; \nsize_t  Var3=strlen(Var1); \nchar *Var4=FUNC1(Var5); \nif (Var4 != NULL )\nstrncat(Var1+Var3,Var4,100-Var3-1); \nVar6=Var1; \n"
+  }
+]

@@ -1,1 +1,68 @@
-[{"FileName": "CWE78_OS_Command_Injection__char_environment_execl_16.c", "Caller": "CWE78_OS_Command_Injection__char_environment_execl_16_bad", "Source": false, "Sink": false, "idx": 0, "CWE-ID": "CWE-78", "category": "CallExpression", "criterion": "strlen", "line": 62, "label": 0, "slices": ["    char * data;\n", "    char dataBuffer[100] = COMMAND_ARG2;\n", "    data = dataBuffer;\n", "    while(1)\n", "            size_t dataLen = strlen(data);\n", "            char * environment = GETENV(ENV_VARIABLE);\n", "            if (environment != NULL)\n", "                strncat(data+dataLen, environment, 100-dataLen-1);\n"], "tokenized": "char *Var1; \nchar  Var2[100]=Var3; \nVar1=Var2; \nwhile (1)\nsize_t  Var4=strlen(Var1); \nchar *Var5=FUNC1(Var6); \nif (Var5 != NULL )\nstrncat(Var1+Var4,Var5,100-Var4-1); \n"}, {"FileName": "CWE78_OS_Command_Injection__char_environment_execl_16.c", "Caller": "CWE78_OS_Command_Injection__char_environment_execl_16_bad", "Source": false, "Sink": false, "idx": 1, "CWE-ID": "CWE-78", "category": "CallExpression", "criterion": "strncat", "line": 68, "label": 0, "slices": ["    char * data;\n", "    char dataBuffer[100] = COMMAND_ARG2;\n", "    data = dataBuffer;\n", "    while(1)\n", "            size_t dataLen = strlen(data);\n", "            char * environment = GETENV(ENV_VARIABLE);\n", "            if (environment != NULL)\n", "                strncat(data+dataLen, environment, 100-dataLen-1);\n"], "tokenized": "char *Var1; \nchar  Var2[100]=Var3; \nVar1=Var2; \nwhile (1)\nsize_t  Var4=strlen(Var1); \nchar *Var5=FUNC1(Var6); \nif (Var5 != NULL )\nstrncat(Var1+Var4,Var5,100-Var4-1); \n"}, {"FileName": "CWE78_OS_Command_Injection__char_environment_execl_16.c", "Caller": "goodG2B", "Source": false, "Sink": false, "idx": 2, "CWE-ID": "CWE-78", "category": "CallExpression", "criterion": "strcat", "line": 91, "label": 1, "slices": ["    char * data;\n", "    char dataBuffer[100] = COMMAND_ARG2;\n", "    data = dataBuffer;\n", "    while(1)\n", "        strcat(data, \"*.*\");\n"], "tokenized": "char *Var1; \nchar  Var2[100]=Var3; \nVar1=Var2; \nwhile (1)\nstrcat(Var1,STRING); \n"}]
+[
+  {
+    "FileName": "CWE78_OS_Command_Injection__char_environment_execl_16.c",
+    "Caller": "CWE78_OS_Command_Injection__char_environment_execl_16_bad",
+    "Source": false,
+    "Sink": false,
+    "idx": 0,
+    "CWE-ID": "CWE-78",
+    "category": "CallExpression",
+    "criterion": "strlen",
+    "line": 62,
+    "label": 0,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = COMMAND_ARG2;\n",
+      "    data = dataBuffer;\n",
+      "    while(1)\n",
+      "            size_t dataLen = strlen(data);\n",
+      "            char * environment = GETENV(ENV_VARIABLE);\n",
+      "            if (environment != NULL)\n",
+      "                strncat(data+dataLen, environment, 100-dataLen-1);\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=Var3; \nVar1=Var2; \nwhile (1)\nsize_t  Var4=strlen(Var1); \nchar *Var5=FUNC1(Var6); \nif (Var5 != NULL )\nstrncat(Var1+Var4,Var5,100-Var4-1); \n"
+  },
+  {
+    "FileName": "CWE78_OS_Command_Injection__char_environment_execl_16.c",
+    "Caller": "CWE78_OS_Command_Injection__char_environment_execl_16_bad",
+    "Source": false,
+    "Sink": false,
+    "idx": 1,
+    "CWE-ID": "CWE-78",
+    "category": "CallExpression",
+    "criterion": "strncat",
+    "line": 68,
+    "label": 0,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = COMMAND_ARG2;\n",
+      "    data = dataBuffer;\n",
+      "    while(1)\n",
+      "            size_t dataLen = strlen(data);\n",
+      "            char * environment = GETENV(ENV_VARIABLE);\n",
+      "            if (environment != NULL)\n",
+      "                strncat(data+dataLen, environment, 100-dataLen-1);\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=Var3; \nVar1=Var2; \nwhile (1)\nsize_t  Var4=strlen(Var1); \nchar *Var5=FUNC1(Var6); \nif (Var5 != NULL )\nstrncat(Var1+Var4,Var5,100-Var4-1); \n"
+  },
+  {
+    "FileName": "CWE78_OS_Command_Injection__char_environment_execl_16.c",
+    "Caller": "goodG2B",
+    "Source": false,
+    "Sink": false,
+    "idx": 2,
+    "CWE-ID": "CWE-78",
+    "category": "CallExpression",
+    "criterion": "strcat",
+    "line": 91,
+    "label": 1,
+    "slices": [
+      "    char * data;\n",
+      "    char dataBuffer[100] = COMMAND_ARG2;\n",
+      "    data = dataBuffer;\n",
+      "    while(1)\n",
+      "        strcat(data, \"*.*\");\n"
+    ],
+    "tokenized": "char *Var1; \nchar  Var2[100]=Var3; \nVar1=Var2; \nwhile (1)\nstrcat(Var1,STRING); \n"
+  }
+]

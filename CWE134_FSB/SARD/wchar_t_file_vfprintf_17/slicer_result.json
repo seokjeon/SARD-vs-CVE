@@ -1,1 +1,142 @@
-[{"FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c", "Caller": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad", "Source": false, "Sink": true, "idx": 0, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "wcslen", "line": 54, "label": 0, "slices": ["    int i,j;\n", "    wchar_t * data;\n", "    data = dataBuffer;\n", "    for(i = 0; i < 1; i++)\n", "            size_t dataLen = wcslen(data);\n", "            FILE * pFile;\n", "            if (100-dataLen > 1)\n", "                if (pFile != NULL)\n", "    for(j = 0; j < 1; j++)\n", "        badVaSinkB(data, data);\n"]}, {"FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c", "Caller": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad", "Source": false, "Sink": true, "idx": 1, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "fopen", "line": 59, "label": 0, "slices": ["    int i,j;\n", "    wchar_t * data;\n", "    for(i = 0; i < 1; i++)\n", "            size_t dataLen = wcslen(data);\n", "            FILE * pFile;\n", "            if (100-dataLen > 1)\n", "                pFile = fopen(FILENAME, \"r\");\n", "                if (pFile != NULL)\n", "                    fclose(pFile);\n"]}, {"FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c", "Caller": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad", "Source": false, "Sink": true, "idx": 2, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "fclose", "line": 69, "label": 0, "slices": ["    int i,j;\n", "    wchar_t * data;\n", "    for(i = 0; i < 1; i++)\n", "            size_t dataLen = wcslen(data);\n", "            FILE * pFile;\n", "            if (100-dataLen > 1)\n", "                pFile = fopen(FILENAME, \"r\");\n", "                if (pFile != NULL)\n", "                    fclose(pFile);\n"]}, {"FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c", "Caller": "goodB2G", "Source": false, "Sink": true, "idx": 3, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "wcslen", "line": 106, "label": 0, "slices": ["    int i,k;\n", "    wchar_t * data;\n", "    data = dataBuffer;\n", "    for(i = 0; i < 1; i++)\n", "            size_t dataLen = wcslen(data);\n", "            FILE * pFile;\n", "            if (100-dataLen > 1)\n", "                if (pFile != NULL)\n", "    for(k = 0; k < 1; k++)\n", "        goodB2GVaSinkG(data, data);\n"]}, {"FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c", "Caller": "goodB2G", "Source": false, "Sink": true, "idx": 4, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "fopen", "line": 111, "label": 0, "slices": ["    int i,k;\n", "    wchar_t * data;\n", "    for(i = 0; i < 1; i++)\n", "            size_t dataLen = wcslen(data);\n", "            FILE * pFile;\n", "            if (100-dataLen > 1)\n", "                pFile = fopen(FILENAME, \"r\");\n", "                if (pFile != NULL)\n", "                    fclose(pFile);\n"]}, {"FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c", "Caller": "goodB2G", "Source": false, "Sink": true, "idx": 5, "CWE-ID": "CWE-134", "category": "CallExpression", "criterion": "fclose", "line": 121, "label": 0, "slices": ["    int i,k;\n", "    wchar_t * data;\n", "    for(i = 0; i < 1; i++)\n", "            size_t dataLen = wcslen(data);\n", "            FILE * pFile;\n", "            if (100-dataLen > 1)\n", "                pFile = fopen(FILENAME, \"r\");\n", "                if (pFile != NULL)\n", "                    fclose(pFile);\n"]}]
+[
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c",
+    "Caller": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad",
+    "Source": false,
+    "Sink": true,
+    "idx": 0,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "wcslen",
+    "line": 54,
+    "label": 0,
+    "slices": [
+      "    int i,j;\n",
+      "    wchar_t * data;\n",
+      "    data = dataBuffer;\n",
+      "    for(i = 0; i < 1; i++)\n",
+      "            size_t dataLen = wcslen(data);\n",
+      "            FILE * pFile;\n",
+      "            if (100-dataLen > 1)\n",
+      "                if (pFile != NULL)\n",
+      "    for(j = 0; j < 1; j++)\n",
+      "        badVaSinkB(data, data);\n"
+    ]
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c",
+    "Caller": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad",
+    "Source": false,
+    "Sink": true,
+    "idx": 1,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "fopen",
+    "line": 59,
+    "label": 0,
+    "slices": [
+      "    int i,j;\n",
+      "    wchar_t * data;\n",
+      "    for(i = 0; i < 1; i++)\n",
+      "            size_t dataLen = wcslen(data);\n",
+      "            FILE * pFile;\n",
+      "            if (100-dataLen > 1)\n",
+      "                pFile = fopen(FILENAME, \"r\");\n",
+      "                if (pFile != NULL)\n",
+      "                    fclose(pFile);\n"
+    ]
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c",
+    "Caller": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17_bad",
+    "Source": false,
+    "Sink": true,
+    "idx": 2,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "fclose",
+    "line": 69,
+    "label": 0,
+    "slices": [
+      "    int i,j;\n",
+      "    wchar_t * data;\n",
+      "    for(i = 0; i < 1; i++)\n",
+      "            size_t dataLen = wcslen(data);\n",
+      "            FILE * pFile;\n",
+      "            if (100-dataLen > 1)\n",
+      "                pFile = fopen(FILENAME, \"r\");\n",
+      "                if (pFile != NULL)\n",
+      "                    fclose(pFile);\n"
+    ]
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c",
+    "Caller": "goodB2G",
+    "Source": false,
+    "Sink": true,
+    "idx": 3,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "wcslen",
+    "line": 106,
+    "label": 0,
+    "slices": [
+      "    int i,k;\n",
+      "    wchar_t * data;\n",
+      "    data = dataBuffer;\n",
+      "    for(i = 0; i < 1; i++)\n",
+      "            size_t dataLen = wcslen(data);\n",
+      "            FILE * pFile;\n",
+      "            if (100-dataLen > 1)\n",
+      "                if (pFile != NULL)\n",
+      "    for(k = 0; k < 1; k++)\n",
+      "        goodB2GVaSinkG(data, data);\n"
+    ]
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c",
+    "Caller": "goodB2G",
+    "Source": false,
+    "Sink": true,
+    "idx": 4,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "fopen",
+    "line": 111,
+    "label": 0,
+    "slices": [
+      "    int i,k;\n",
+      "    wchar_t * data;\n",
+      "    for(i = 0; i < 1; i++)\n",
+      "            size_t dataLen = wcslen(data);\n",
+      "            FILE * pFile;\n",
+      "            if (100-dataLen > 1)\n",
+      "                pFile = fopen(FILENAME, \"r\");\n",
+      "                if (pFile != NULL)\n",
+      "                    fclose(pFile);\n"
+    ]
+  },
+  {
+    "FileName": "CWE134_Uncontrolled_Format_String__wchar_t_file_vfprintf_17.c",
+    "Caller": "goodB2G",
+    "Source": false,
+    "Sink": true,
+    "idx": 5,
+    "CWE-ID": "CWE-134",
+    "category": "CallExpression",
+    "criterion": "fclose",
+    "line": 121,
+    "label": 0,
+    "slices": [
+      "    int i,k;\n",
+      "    wchar_t * data;\n",
+      "    for(i = 0; i < 1; i++)\n",
+      "            size_t dataLen = wcslen(data);\n",
+      "            FILE * pFile;\n",
+      "            if (100-dataLen > 1)\n",
+      "                pFile = fopen(FILENAME, \"r\");\n",
+      "                if (pFile != NULL)\n",
+      "                    fclose(pFile);\n"
+    ]
+  }
+]
